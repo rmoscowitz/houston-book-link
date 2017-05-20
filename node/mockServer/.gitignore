@@ -1,0 +1,5 @@
+babel-cache
+build
+.gradle
+node_modules
+npm-debug.log
