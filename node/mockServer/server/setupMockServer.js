@@ -1,5 +1,6 @@
 
 import libraryData from './data/libraries.json';
+import singleSearch from './data/Laut_single_search.json';
 import search from './data/search.json';
 import delay from './delay.js';
 
@@ -14,6 +15,13 @@ exports.getMockSearch = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(search);
+    }, delay());
+  });
+};
+exports.getMockSingleSearch = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(singleSearch);
     }, delay());
   });
 };
