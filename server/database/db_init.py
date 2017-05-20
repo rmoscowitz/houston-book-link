@@ -1,13 +1,8 @@
-from sqlalchemy import create_engine
-from sqlalchemy import Column, String, DateTime, Integer
-from sqlalchemy.dialects.postgres import JSON
+from sqlalchemy import Column, String, DateTime, Integer, ForeignKey
+from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
-USER = "dylan"
-PASSWORD = ""
-DBNAME = "mydb"
-CONN = create_engine("postgresql+psycopg2://{}:{}@/{}".format(USER, PASSWORD, DBNAME))
 
 Base = declarative_base()
 
@@ -23,7 +18,7 @@ class Library(Base):
 class Book(Base):
     __tablename__ = "books"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     overdrive_id = Column(String)
     media_type = Column(String)
     title = Column(String)
@@ -34,10 +29,34 @@ class Book(Base):
     star_rating = Column(String)
     date_added = Column(DateTime)
     response = Column(JSON)
-    library_id = Column(Integer, ForeignKey("library.id"))
+    library_id = Column(Integer, ForeignKey(Library.id))
 
 
-Base.metadata.create_all(CONN)
+class BookImage(Base):
+    __tablename__ = "book_images"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    book_id = Column(Integer, ForeignKey(Book.id))
+    title = Column(String)
+    type = Column(String)
+    href = Column(String)
+
+
+class Format(Base):
+    __tablename__ = "formats"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    key = Column(String)
+    label = Column(String)
+
+#
+class BookFormat(Base):
+    __tablename__ = "book_formats"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    book_id = Column(Integer, ForeignKey(Book.id))
+    format_id = Column(Integer, ForeignKey(Format.id))
+
 
 
 
