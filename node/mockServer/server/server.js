@@ -1,4 +1,4 @@
-import {getMockLibraries} from './setupMockServer.js';
+import {getMockLibraries,getMockSearch} from './setupMockServer.js';
 
 var express = require('express')
 var app = express()
@@ -10,6 +10,13 @@ app.get('/', function(req, res) {
 app.get('/libraries', function(req, res) {
   console.log('Retrieving mock libraries data');
   getMockLibraries().then((data) => {
+    res.send(data);
+  });
+});
+
+app.get('/search', function(req, res) {
+  console.log('Performing mock search');
+  getMockSearch().then((data) => {
     res.send(data);
   });
 });
