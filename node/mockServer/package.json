@@ -9,6 +9,7 @@
         "start": "babel-node ./server/server.js"
     },
     "devDependencies": {
+        "babel-preset-node6": "11.0.0",
         "babel-cli": "6.18.0",
         "babel-core": "6.24.1",
         "express": "4.15.2",
