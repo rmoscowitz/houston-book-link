@@ -37,17 +37,17 @@ def scrape_collection(token):
 
 def do_request(token, req_num):
     resp = requests.get(request_url(token, req_num), headers=HEADERS).json()
-    write_response(req_num, resp)
+    write_response(req_num, resp, token)
     return resp
 
 def request_url(token, n):
     return BASE.format(collection=token, offset=OFFSET_SCALAR*n)
 
-
-
-def write_response(n, out):
-    with open("response_data/{}.json".format(n), 'w') as fp:
+def write_response(n, out, token):
+    fn = "response_data/{}_{}.json".format(token, n)
+    with open(fn, 'w') as fp:
         fp.write(json.dumps(out))
+    print "Wrote: {}".format(fn)
 
 if __name__ == "__main__":
     run()
