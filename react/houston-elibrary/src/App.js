@@ -1,21 +1,54 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+} from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+import About from './About';
+import Home from './Home';
+import Menu from './Menu';
+
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showNav: false,
+        };
+        this._onButtonClick = this._onButtonClick.bind(this);
+    }
+
+    _onButtonClick() {
+        console.log('onbuttonclick');
+        this.setState({
+            showNav: !this.state.showNav
+        });
+        console.log(this.state)
+    }
+
+    render() {
+        return (
+            <Router>
+                <div className="App">
+                    <div className="App-header">
+                        <h2>Houston E-Library Portal</h2>
+                        <button className="menuButton" onClick={this._onButtonClick}>Menu</button>
+                    </div>
+
+                    { this.state.showNav ? <Menu /> : null }
+
+                    <div id="main">
+                        <Route exact path="/" component={Home}/>
+                        <Route path="/about" component={About}/>
+                    </div>
+                </div>
+            </Router>
+        )
+    }
+
 }
 
-export default App;
+export default App
+
+
