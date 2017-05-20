@@ -10,7 +10,7 @@ class Library(Base):
     __tablename__ = "libraries"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    overdrive_id = Column(String)
+    overdrive_id = Column(String, unique=True)
     name = Column(String)
     collection_token = Column(String)
 
@@ -19,7 +19,7 @@ class Book(Base):
     __tablename__ = "books"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    overdrive_id = Column(String)
+    overdrive_id = Column(String, unique=True)
     media_type = Column(String)
     title = Column(String)
     subtitle = Column(String)
