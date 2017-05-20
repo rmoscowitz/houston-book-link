@@ -27,15 +27,24 @@ class Book(Base):
     sort_title = Column(String)
     primary_creator_role = Column(String)
     primary_creator_name = Column(String)
-    star_rating = Column(String)
-    date_added = Column(DateTime)
-    overdrive_href = Column(String)
     img_thumbnail = Column(String)
     img_cover_150_wide = Column(String)
     img_cover = Column(String)
     img_cover_300_wide = Column(String)
-    response = Column(JSON)
+
+
+class LibraryBook(Base):
+    __tablename__ = "library_books"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    book_id = Column(Integer, ForeignKey(Book.id))
     library_id = Column(Integer, ForeignKey(Library.id))
+    book = relationship("Book")
+    library = relationship("Library")
+    date_added = Column(DateTime)
+    star_rating = Column(String)
+    overdrive_href = Column(String)
+    response = Column(JSON)
 
 
 class Format(Base):
@@ -45,13 +54,14 @@ class Format(Base):
     key = Column(String)
     label = Column(String)
 
-#
+
 class BookFormat(Base):
     __tablename__ = "book_formats"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     book_id = Column(Integer, ForeignKey(Book.id))
     format_id = Column(Integer, ForeignKey(Format.id))
+    book = relationship("Book")
 
 
 
