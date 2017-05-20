@@ -22,24 +22,20 @@ class Book(Base):
     overdrive_id = Column(String, unique=True)
     media_type = Column(String)
     title = Column(String)
+    series = Column(String)
     subtitle = Column(String)
     sort_title = Column(String)
     primary_creator_role = Column(String)
     primary_creator_name = Column(String)
     star_rating = Column(String)
     date_added = Column(DateTime)
+    overdrive_href = Column(String)
+    img_thumbnail = Column(String)
+    img_cover_150_wide = Column(String)
+    img_cover = Column(String)
+    img_cover_300_wide = Column(String)
     response = Column(JSON)
     library_id = Column(Integer, ForeignKey(Library.id))
-
-
-class BookImage(Base):
-    __tablename__ = "book_images"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    book_id = Column(Integer, ForeignKey(Book.id))
-    title = Column(String)
-    type = Column(String)
-    href = Column(String)
 
 
 class Format(Base):

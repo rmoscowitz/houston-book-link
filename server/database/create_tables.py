@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 
-from db_init import Base
+from models import Base
 
 USER = "dylan"
 PASSWORD = ""
