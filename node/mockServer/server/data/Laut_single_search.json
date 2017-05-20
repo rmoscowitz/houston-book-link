@@ -1,8 +1,6 @@
 {
-  "primaryCreator": {
-    "role": "Author",
-    "name": "Agnes C. (Agnes Christina) Laut"
-  },
+  "primaryCreatorRole": "Author",
+  "primaryCreatorName": "Agnes C. (Agnes Christina) Laut",
   "dateAdded": "2000-01-01T00:00:00-05:00",
   "subtitle": "A Chronicle of the Fur Trade in the North (Volume 18 of the Chronicles of Canada)",
   "links": {
@@ -38,23 +36,11 @@
   "mediaType": "eBook",
   "starRating": 0,
   "sortTitle": "\"Adventurers of England\" on Hudson Bay",
-  "images": {
-    "cover150Wide": {
-      "href": "https://img1.od-cdn.com/ImageType-150/2254-1/7BA/79E/A1/{7BA79EA1-449E-4A91-9355-8ACA87F8ECFE}Img150.jpg",
-      "type": "image/jpeg"
+  "imagesCover": {
+      "href": "https://img1.od-cdn.com/ImageType-100/2254-1/{7BA79EA1-449E-4A91-9355-8ACA87F8ECFE}Img100.jpg"
     },
-    "cover300Wide": {
-      "href": "https://img1.od-cdn.com/ImageType-400/2254-1/7BA/79E/A1/{7BA79EA1-449E-4A91-9355-8ACA87F8ECFE}Img400.jpg",
-      "type": "image/jpeg"
+  "imagesThumbnail": {
+      "href": "https://img1.od-cdn.com/ImageType-200/2254-1/{7BA79EA1-449E-4A91-9355-8ACA87F8ECFE}Img200.jpg"
     },
-    "cover": {
-      "href": "https://img1.od-cdn.com/ImageType-100/2254-1/{7BA79EA1-449E-4A91-9355-8ACA87F8ECFE}Img100.jpg",
-      "type": "image/jpeg"
-    },
-    "thumbnail": {
-      "href": "https://img1.od-cdn.com/ImageType-200/2254-1/{7BA79EA1-449E-4A91-9355-8ACA87F8ECFE}Img200.jpg",
-      "type": "image/jpeg"
-    }
-  },
   "id": "7ba79ea1-449e-4a91-9355-8aca87f8ecfe"
 }
