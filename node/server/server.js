@@ -18,9 +18,10 @@ app.get('/search', function(req, res) {
     limit: req.query.limit || 20,
     offset: req.query.offset || 0
   }
-  search(params).then((data) => {
+  search(params).then(data => {
     res.send(data)
-  })
+  });
+
 });
 
 app.listen(4000, function () {

@@ -16,21 +16,22 @@ const bookshelf = require('bookshelf')(knex);
 const Book = bookshelf.Model.extend({
   tableName: 'books',
   libraries: function() {
-    return this.hasMany(Library, 'library_id').through(LibraryBook, 'id');
+    return this.hasMany(Library).through(LibraryBook, 'id', 'book_id', 'library_id');
   },
   libraryBooks: function() {
     return this.hasMany(LibraryBook);
   },
   formats: function() {
-    return this.hasMany(Format, 'format_id').through(BookFormat, 'id');
+    return this.hasMany(Format).through(BookFormat, 'id', 'book_id', 'format_id');
   }
 });
 
 const LibraryBook = bookshelf.Model.extend({
-  tableName: 'library_books',
+  tableName: 'library_books'
 });
 
 const Library = bookshelf.Model.extend({
+  tableName: 'libraries',
   tableName: 'libraries',
 });
 
@@ -44,5 +45,6 @@ const Format = bookshelf.Model.extend({
 
 export {
   Book,
-  Library
+  Library,
+  bookshelf
 }

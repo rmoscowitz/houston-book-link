@@ -1,13 +1,16 @@
-import { Book, Library } from './models'
+import { Book, Library, bookshelf } from './models'
 
 export const search = (params) => {
   // TODO where libraries
   // TODO fetch page
-  return Book.query(function(qb) {
+  const BookCollection = bookshelf.Collection.extend({
+    model: Book
+  })
+  return new BookCollection().query(function(qb) {
     qb.whereRaw(`tsv @@ to_tsquery('${params.search}')`)
     qb.limit(params.limit)
     qb.offset(params.offset)
-  }).fetchAll({
+  }).fetch({
     debug: true,
     withRelated: ['libraries', 'libraryBooks', 'formats']
   }).then(function(books) {
@@ -18,7 +21,7 @@ export const search = (params) => {
       // TODO merge lib books
       delete out.libraryBook.response
       out.formats = book.related("formats").toJSON()
-      return book
+      return out
     })
   }).catch(function(err) {
     console.error(err);
