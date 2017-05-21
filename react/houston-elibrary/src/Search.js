@@ -53,8 +53,7 @@ class Search extends React.Component {
             .filter(library => library.selected)
             .map(library => library.id);
 
-        // fetch(`/search?libraries=${selectedIds.join(',')}`)
-        fetch(`/search`)
+        fetch(`/search?search=${value}&libraries=${selectedIds.join(',')}`)
             .then(response => {
                 response.json().then(data => {
                     this.setState({
