@@ -1,18 +1,4 @@
 import React from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  Container,
-  Row,
-  Col,
-  Jumbotron,
-  Button
-} from 'reactstrap';
 import houstonhack from './houstonhack.jpg';
 import mountain from './mountain.svg';
 import christian from './christian.png';
@@ -38,13 +24,13 @@ class About extends React.Component {
   }
   render() {
     return (
-    	<div className="container">
+    	<div className="about-container">
 	      	<h1>About</h1>
 		    <div className="row media">
 		    	<div className="col-sm-6 media-middle">
-		    		<img className="media-object img-thumbnail" src={houstonhack} />
+		    		<img className="media-object img-thumbnail" src={houstonhack} alt="Houston hackathon 2017 flyer" />
 		    	</div>
-		    	<div className="col-sm-6" media-body>
+		    	<div className="col-sm-6">
 			    	<h2>Houston Hackathon 2017</h2>
 			    	<p>This project was done as part of the 2017 Houston Hackathon,
 			    	where teams spend a weekend building applications that help solve
@@ -63,7 +49,7 @@ class About extends React.Component {
 			    	</p>
 			    </div>
 			    <div className="col-sm-6 media-middle">
-		    		<img className="media-object" src={mountain} width="256" />
+		    		<img className="media-object" src={mountain} width="256" alt="mountain icon with flag"/>
 		    	</div>
 		    </div>
 		    <div className="row row-media">
