@@ -19,6 +19,9 @@ app.get('/search', function(req, res) {
   });
 });
 
+app.use(express.static('build'));
+app.use(express.static('public'));
+
 app.get('*', function(req, res) {
   res.send(express.static('../react/houston-elibrary/build'));
 });
