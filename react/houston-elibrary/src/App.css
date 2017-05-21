@@ -172,5 +172,6 @@
     font-weight: bold;
 }
 
-.search-container li .result .author {
+.search-container li .result .checkout-info {
+  padding: 5px;
 }

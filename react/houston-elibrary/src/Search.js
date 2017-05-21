@@ -8,22 +8,35 @@ import sampleCoverImage from './DefaultBook.png'
 // input value for every given suggestion.
 const getSuggestionValue = suggestion => suggestion.title;
 
-// Use your imagination to render suggestions.
-const renderSuggestion = suggestion => (
-    <div className="result row">
-        <div className="col-2">
-            <img src={suggestion.img_thumbnail || sampleCoverImage}
-                 alt={suggestion.title}/>
+
+const renderCheckoutInfo = locations => {
+    return locations.map((location, index) => (
+        <a key={index} href={location.overdrive_href}>Available at {location.library_name}<br /></a>
+    ));
+}
+
+const renderSuggestion = suggestion => {
+    const checkout = locations => renderCheckoutInfo(locations);
+
+    return (
+        <div className="result row">
+            <div className="col-2">
+                <img src={suggestion.img_thumbnail || sampleCoverImage}
+                     alt={suggestion.title}/>
+            </div>
+            <div className="result-details col-5">
+                <span className="title">{suggestion.title}</span>
+                <br/>
+                <span>by&nbsp;</span>{suggestion.primary_creator_name}
+                <br/>
+                {suggestion.media_type}
+            </div>
+            <div className="checkout-info col-5">
+                { checkout(suggestion.locations) }
+            </div>
         </div>
-        <div className="result-details col-10">
-            <span className="title">{suggestion.title}</span>
-            <br/>
-            <span>by&nbsp;</span>{suggestion.primary_creator_name}
-            <br/>
-            {suggestion.media_type}
-        </div>
-    </div>
-);
+    );
+}
 
 class Search extends React.Component {
     constructor(props) {
