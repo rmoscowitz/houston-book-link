@@ -3,41 +3,6 @@ import Autosuggest from 'react-autosuggest';
 
 import sampleCoverImage from './DefaultBook.png'
 
-// When suggestion is clicked, Autosuggest needs to populate the input element
-// based on the clicked suggestion. Teach Autosuggest how to calculate the
-// input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.title;
-
-
-const renderCheckoutInfo = locations => {
-    return locations.map((location, index) => (
-        <a key={index} href={location.overdrive_href}>Available at {location.library_name}<br /></a>
-    ));
-}
-
-const renderSuggestion = suggestion => {
-    const checkout = locations => renderCheckoutInfo(locations);
-
-    return (
-        <div className="result row">
-            <div className="col-2">
-                <img src={suggestion.img_thumbnail || sampleCoverImage}
-                     alt={suggestion.title}/>
-            </div>
-            <div className="result-details col-5">
-                <span className="title">{suggestion.title}</span>
-                <br/>
-                <span>by&nbsp;</span>{suggestion.primary_creator_name}
-                <br/>
-                {suggestion.media_type}
-            </div>
-            <div className="checkout-info col-5">
-                { checkout(suggestion.locations) }
-            </div>
-        </div>
-    );
-}
-
 class Search extends React.Component {
     constructor(props) {
         super(props);
@@ -51,6 +16,10 @@ class Search extends React.Component {
             value: '',
             suggestions: [],
         };
+
+        this.getSuggestionValue = this.getSuggestionValue.bind(this)
+        this.renderSuggestion = this.renderSuggestion.bind(this)
+        this.renderCheckoutInfo = this.renderCheckoutInfo.bind(this)
     }
 
     onChange = (event, {newValue}) => {
@@ -58,6 +27,54 @@ class Search extends React.Component {
             value: newValue
         });
     };
+
+    // When suggestion is clicked, Autosuggest needs to populate the input element
+    // based on the clicked suggestion. Teach Autosuggest how to calculate the
+    // input value for every given suggestion.
+    getSuggestionValue(suggestion) {
+        return suggestion.title;
+    }
+
+    renderCheckoutInfo(locations) {
+        return locations.map((location, index) => {
+            return (
+                <a key={index} href={location.overdrive_href}>Available at {location.library_name}<br /></a>
+            )
+        });
+    }
+
+    renderSuggestion(suggestion) {
+        const checkout = locations => this.renderCheckoutInfo(locations);
+        const selectedLibraries = this.props.selectedLibraries
+            .filter(library => library.selected)
+            .map(library => library.id)
+
+        const hasDuplicates = (array) => (new Set(array)).size !== array.length;
+        const allLibs = [...selectedLibraries, ...suggestion.locations.map(location => location.library_id)];
+
+        // console.log(suggestion.title, allLibs, hasDuplicates(allLibs));
+
+        if (hasDuplicates(allLibs)) {
+            return (
+                <div className="result row">
+                    <div className="col-2">
+                        <img src={suggestion.img_thumbnail || sampleCoverImage}
+                             alt={suggestion.title}/>
+                    </div>
+                    <div className="result-details col-5">
+                        <span className="title">{suggestion.title}</span>
+                        <br/>
+                        <span>by&nbsp;</span>{suggestion.primary_creator_name}
+                        <br/>
+                        {suggestion.media_type}
+                    </div>
+                    <div className="checkout-info col-5">
+                        { checkout(suggestion.locations) }
+                    </div>
+                </div>
+            );
+        }
+    }
 
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
@@ -102,8 +119,8 @@ class Search extends React.Component {
                     suggestions={suggestions}
                     onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                     onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                    getSuggestionValue={getSuggestionValue}
-                    renderSuggestion={renderSuggestion}
+                    getSuggestionValue={this.getSuggestionValue}
+                    renderSuggestion={this.renderSuggestion}
                     inputProps={inputProps}
                 />
             </div>
