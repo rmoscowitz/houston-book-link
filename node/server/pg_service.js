@@ -7,7 +7,7 @@ export const search = (params) => {
     model: Book
   })
   return new BookCollection().query(function(qb) {
-    qb.whereRaw(`tsv @@ to_tsquery('${params.search}')`)
+    qb.whereRaw(`tsv @@ plainto_tsquery('${params.search}')`)
     qb.limit(params.limit)
     qb.offset(params.offset)
   }).fetch({
