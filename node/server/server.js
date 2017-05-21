@@ -9,12 +9,14 @@ app.get('/', function(req, res) {
 
 app.get('/libraries', function(req, res) {
   console.log('Retrieving mock libraries data');
+  // TODO flesh this out
   res.send({
     lib: 1
   });
 });
 
 app.get('/search', function(req, res) {
+  // TODO merge query params with request params
   var params = {
     search: 'some query',
     libraries: [1, 2],
@@ -22,7 +24,6 @@ app.get('/search', function(req, res) {
     offset: 0
   }
   search(params).then((data) => {
-    console.log(data)
     res.send(data)
   })
 });

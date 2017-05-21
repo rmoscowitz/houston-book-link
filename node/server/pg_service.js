@@ -1,9 +1,12 @@
 import Book from './models'
 
 module.exports = function(params) {
+  // TODO where libraries
+  // TODO fetch page
   return Book.query(function(qb) {
-    qb.whereRaw("tsv @@ to_tsquery('george')")
+    qb.whereRaw(`tsv @@ to_tsquery('${params.search}')`)
     qb.limit(params.limit)
+    qb.offset(params.offset)
   }).fetchAll({
     debug: true,
     withRelated: ['libraries', 'libraryBooks', 'formats']
@@ -12,6 +15,7 @@ module.exports = function(params) {
       const out = book.toJSON();
       out.libraries = book.related("libraries").toJSON();
       out.libraryBook = book.related("libraryBooks").toJSON()
+      // TODO merge lib books
       delete out.libraryBook.response
       out.formats = book.related("formats").toJSON()
       return book

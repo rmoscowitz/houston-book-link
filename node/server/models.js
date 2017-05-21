@@ -1,3 +1,5 @@
+// TODO read from ENV vars
+
 const knex = require('knex')({
   client: 'pg',
   connection: {
