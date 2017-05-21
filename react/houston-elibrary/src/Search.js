@@ -1,7 +1,7 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 
-import sampleCoverImage from './sample-book-cover.jpg'
+import sampleCoverImage from './DefaultBook.png'
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -12,7 +12,7 @@ const getSuggestionValue = suggestion => suggestion.title;
 const renderSuggestion = suggestion => (
     <div className="result row">
         <div className="col-2">
-            <img src={sampleCoverImage}
+            <img src={suggestion.img_thumbnail || sampleCoverImage}
                  alt={suggestion.title}/>
         </div>
         <div className="result-details col-10">
