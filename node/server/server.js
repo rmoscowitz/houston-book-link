@@ -2,9 +2,10 @@ var express = require('express')
 var app = express()
 import { search, libraries } from './pg_service';
 
+app.use("/", express.static('../react/houston-elibrary/build'))
 
 app.get('/', function(req, res) {
-  res.send('Mock eLibrary api server');
+  res.send(express.static('../react/houston-elibrary/build/index.html'));
 });
 
 app.get('/libraries', function(req, res) {
