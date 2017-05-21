@@ -2,6 +2,7 @@
 import React from 'react'
 
 import Card from './Card'
+import Search from './Search'
 
 import harrisCard from './harris-co-cards.png'
 import houstonCard from './houston-card.png'
@@ -40,7 +41,7 @@ class Home extends React.Component {
                           select={this.select}/>
                 </div>
 
-                { /* search */ }
+                <Search />
             </div>
         )
     }

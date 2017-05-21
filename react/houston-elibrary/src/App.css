@@ -141,3 +141,22 @@
 .card-container .card svg {
   border-radius: 45px;
 }
+
+/* Search */
+.search-container input {
+  margin-top: 20px;
+  width: 90%;
+  height: 45px;
+  padding-left: 10px;
+  border: 1px solid darkgray;
+}
+
+.search-container input:focus{
+  outline: none;
+}
+
+.search-container ul {
+  padding: 10px 5%;
+  list-style-type: none;
+  text-align: left;
+}

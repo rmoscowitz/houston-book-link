@@ -7,10 +7,11 @@
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-transition-group": "^15.5.2",
+    "react-autosuggest": "^9.0.1",
     "react-dom": "^15.5.4",
     "react-foundation": "^0.7.0",
-    "reactstrap": "^4.6.2",
-    "react-ionicons": "^1.5.7"
+    "react-ionicons": "^1.5.7",
+    "reactstrap": "^4.6.2"
   },
   "devDependencies": {
     "react-router-dom": "^4.1.1",
@@ -21,5 +22,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
