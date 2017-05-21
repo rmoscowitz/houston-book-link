@@ -1,6 +1,6 @@
 import Book from './models'
 
-module.exports = function(params) {
+export const search = (params) => {
   // TODO where libraries
   // TODO fetch page
   return Book.query(function(qb) {
@@ -23,4 +23,8 @@ module.exports = function(params) {
   }).catch(function(err) {
     console.error(err);
   });
+}
+
+export const libraries = () => {
+  console.log("fill me in")
 }

@@ -1,6 +1,6 @@
 var express = require('express')
 var app = express()
-var search = require('./pg_service');
+import { search, libraries } from './pg_service';
 
 
 app.get('/', function(req, res) {
@@ -16,12 +16,11 @@ app.get('/libraries', function(req, res) {
 });
 
 app.get('/search', function(req, res) {
-  // TODO merge query params with request params
   var params = {
-    search: 'some query',
-    libraries: [1, 2],
-    limit: 10,
-    offset: 0
+    search: req.query.search,
+    libraries: req.query.libraries.split(","),
+    limit: req.query.limit,
+    offset: req.query.offset
   }
   search(params).then((data) => {
     res.send(data)
