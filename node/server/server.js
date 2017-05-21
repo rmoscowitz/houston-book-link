@@ -14,7 +14,7 @@ app.get('/libraries', function(req, res) {
 app.get('/search', function(req, res) {
   var params = {
     search: req.query.search || '',
-    libraries: (req.query.libraries || []).split(","),
+    libraries: (req.query.libraries || '').split(","),
     limit: req.query.limit || 20,
     offset: req.query.offset || 0
   }
