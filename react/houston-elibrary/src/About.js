@@ -9,6 +9,7 @@ import daniel from './daniel.png';
 import eric from './eric.png';
 import elaine from './elaine.png';
 import train from './train.png';
+import overdrive from './overdrive.png';
 
 class About extends React.Component {
   constructor(props) {
@@ -100,6 +101,7 @@ class About extends React.Component {
                 </div>
 				<div className="col-xs-12 col-sm-2 col-sm-offset-5">
 					<img className="media-object train" src={train} alt="train coming out of computer" width="48"/>
+					<img className="media-object train" src={overdrive} alt="powered by overdrive" width="48"/>
 				</div>
             </div>
 	    </div>	
