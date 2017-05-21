@@ -9,6 +9,9 @@ import {
 import About from './About';
 import Home from './Home';
 import Resources from './Resources';
+
+import overdrive from './overdrive.png';
+
 import {
   Collapse,
   Navbar,
@@ -38,6 +41,7 @@ class App extends React.Component {
         return (
             <Router>
                 <div className="App">
+                    {/* Top Bar */}
                     <Navbar inverse toggleable>
                       <NavbarToggler right onClick={this.toggle} />
                       <NavbarBrand href="/"><h2>Houston Book Link</h2></NavbarBrand>
@@ -52,9 +56,21 @@ class App extends React.Component {
                         </Nav>
                       </Collapse>
                     </Navbar>
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/about" component={About}/>
-                    <Route path="/resources" component={Resources}/>
+
+                    {/* Body */}
+                    <div className="main-container">
+                        <Route exact path="/" component={Home}/>
+                        <Route path="/about" component={About}/>
+                        <Route path="/resources" component={Resources}/>
+                    </div>
+
+                    {/* Footer */}
+                    <footer className="footer">
+                        <div className="footer-overdrive">
+                            <img src={overdrive}
+                                 alt="Powered by Overdrive Logo"/>
+                        </div>
+                    </footer>
                 </div>
             </Router>
 

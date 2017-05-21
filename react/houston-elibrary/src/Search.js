@@ -76,7 +76,7 @@ class Search extends React.Component {
                         <br/>
                         {suggestion.media_type}
                     </div>
-                    <div className="checkout-info col-5">
+                    <div className="checkout-info col-4">
                         { checkout(suggestion.locations) }
                     </div>
                 </div>
