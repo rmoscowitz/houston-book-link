@@ -8,40 +8,31 @@ import {
 
 import About from './About';
 import Home from './Home';
-import Menu from './Menu';
-import LibraryCards from './LibraryCards';
-
+import FAQ from './FAQ';
+import logo from './logo2.png';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showNav: false,
-        };
-        this._onButtonClick = this._onButtonClick.bind(this);
-    }
-
-    _onButtonClick() {
-        this.setState({
-            showNav: !this.state.showNav
-        });
-    }
-
     render() {
         return (
             <Router>
                 <div className="App">
-                    <div className="App-header">
-                        <h2>Houston E-Library Portal</h2>
-                        <button className="menuButton" onClick={this._onButtonClick}>Menu</button>
-                    </div>
+                    <div className="App-header row">
+                        <h2 className="col-6">
+                            <img src={logo} className="App-logo" alt="logo" />
+                            Houston E-Library Portal
+                        </h2>
+                        <ul className="col-5 nav nav-pills">
+                            <li role="presentation"><a href="/">Home</a></li>
+                            <li role="presentation"><a href="/about">About</a></li>
+                            <li role="presentation"><a href="/faq">FAQ</a></li>
+                        </ul>
 
-                    { this.state.showNav ? <Menu /> : null }
+                    </div>
 
                     <div id="main">
                         <Route exact path="/" component={Home}/>
-                        <Route path ="/about" component={About}/>
-                        <Route path ="/librarycards" component={LibraryCards}/>
+                        <Route path="/about" component={About}/>
+                        <Route path="/faq" component={FAQ}/>
                     </div>
                 </div>
             </Router>

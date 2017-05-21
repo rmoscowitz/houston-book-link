@@ -7,6 +7,7 @@ import robyn from './robyn.png';
 import dylan from './dylan.png';
 import daniel from './daniel.png';
 import eric from './eric.png';
+import elaine from './elaine.png';
 
 class About extends React.Component {
   constructor(props) {
@@ -25,7 +26,6 @@ class About extends React.Component {
   render() {
     return (
     	<div className="about-container">
-	      	<h1>About</h1>
 		    <div className="row media">
 		    	<div className="col-sm-6 media-middle">
 		    		<img className="media-object img-thumbnail" src={houstonhack} alt="Houston hackathon 2017 flyer" />
@@ -52,36 +52,46 @@ class About extends React.Component {
 		    		<img className="media-object" src={mountain} width="256" alt="mountain icon with flag"/>
 		    	</div>
 		    </div>
+
 		    <div className="row row-media">
 		    	<div className="col-sm-12">
 		    		<h2>Team</h2>
-		    		<p></p>
 		    	</div>
-		    	<div className="col-sm-2">
+		    	<div className="offset-1 col-sm-2">
 		    		<img className="media-object" src={cameron} width="128" alt="cameron" />
-		    		<p>Cameron</p>
+		    		<a href="https://github.com/emptyflash">Cameron</a>
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={robyn} width="128" alt="robyn" />
-		    		<p>Robyn</p>
+		    		<a href="https://github.com/rmoscowitz">Robyn</a>
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={daniel} width="128" alt="dan" />
-		    		<p>Dan</p>
+					<a href="https://github.com/DanielJRutledge">Dan</a>
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={dylan} width="128" alt="dylan" />
-		    		<p>Dylan</p>
+		    		<a href="https://github.com/dylanjbarth">Dylan</a>
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={christian} width="128" alt="christian" />
-		    		<p>Christian</p>
-		    	</div>
-		    	<div className="col-sm-2">
-		    		<img className="media-object" src={eric} width="128" alt="eric" />
-		    		<p>Eric</p>
+		    		<a href="https://github.com/ChristianArredondo">Christian</a>
 		    	</div>
 		    </div>
+
+            <div className="row row-media">
+                <div className="col-sm-12">
+                    <h2>Special Thanks</h2>
+                </div>
+				<div className="offset-4 col-sm-2">
+					<img className="media-object" src={eric} width="128" alt="eric" />
+					<a href="https://github.com/mamoot">Eric</a>
+				</div>
+                <div className="col-sm-2">
+                    <img className="media-object" src={elaine} width="128" alt="cameron" />
+                    <a href="https://github.com/imalooney">Elaine</a>
+                </div>
+            </div>
 	    </div>	
     );
   }

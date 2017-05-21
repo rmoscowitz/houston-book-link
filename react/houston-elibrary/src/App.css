@@ -1,9 +1,13 @@
 .App {
   text-align: center;
+  font-size: 14px;
 }
 
 .App-logo {
-  height: 80px;
+  height: 47px;
+  width: 50px;
+  margin-top: -5px;
+  margin-right: 5px;
 }
 
 .App-header {
@@ -14,66 +18,28 @@
   text-align: left;
 }
 
-.App-header .menuButton {
-  z-index: 1;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-}
-
-.sidenav {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  top: 0;
-  right: 0;
-  background-color: #16a085;
-  overflow-x: hidden;
-  padding-top: 60px;
-  transition: 0.5s;
-}
-
-.sidenav a {
-  padding: 5px;
-  text-decoration: none;
-  font-size: 18px;
+.App-header .nav a {
   color: white;
-  display: block;
-  transition: 0.3s
 }
 
-.sidenav a:hover, .offcanvas a:focus{
-  color: #dfdfdf;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-#main {
-  transition: margin-left .5s;
-  padding: 20px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+.App-header .nav a:hover {
+  color: #4c3e7b;
 }
 
 /*About*/
-.about-container .row{
-  padding: 100px 30px 40px 30px;
+.about-container .row {
+  padding: 30px;
   vertical-align: middle;
 }
 
-.about-container img {max-width: 100%}
+.about-container img {
+  display: block;
+  margin: auto;
+  max-width: 95%;
+}
 
-.about-container .col-sm-6 {
-  vertical-align: middle !important;
+.about-container h2 {
+ padding-bottom: 15px;
 }
 
 /* Home */
