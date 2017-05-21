@@ -156,7 +156,50 @@
 }
 
 .search-container ul {
-  padding: 10px 5%;
+  padding-left: 5%;
+  margin-right: 5%;
   list-style-type: none;
   text-align: left;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /*height: 200px;*/
+}
+
+.search-container li .result {
+  margin: 0;
+  border: 1px solid darkgray;
+  border-top: none;
+  padding: 5px;
+  height: 100px;
+}
+
+.search-container li .result {
+  margin: 0;
+  border: 1px solid darkgray;
+  border-top: none;
+  padding: 5px;
+  height: 100px;
+}
+.search-container li .result {
+  margin: 0;
+  border: 1px solid darkgray;
+  border-top: none;
+  padding: 5px;
+  height: 100px;
+}
+
+.search-container li .result img {
+  padding: 5px;
+  height: 100%;
+}
+
+.search-container li .result .result-details {
+  padding: 5px;
+}
+
+.search-container li .result .title {
+    font-weight: bold;
+}
+
+.search-container li .result .author {
 }
