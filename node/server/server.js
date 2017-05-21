@@ -13,10 +13,10 @@ app.get('/libraries', function(req, res) {
 
 app.get('/search', function(req, res) {
   var params = {
-    search: req.query.search,
-    libraries: req.query.libraries.split(","),
-    limit: req.query.limit,
-    offset: req.query.offset
+    search: req.query.search || '',
+    libraries: (req.query.libraries || []).split(","),
+    limit: req.query.limit || 20,
+    offset: req.query.offset || 0
   }
   search(params).then((data) => {
     res.send(data)
