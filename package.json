@@ -10,6 +10,7 @@
     "react-addons-transition-group": "^15.5.2",
     "react-autosuggest": "^9.0.1",
     "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1",
     "react-foundation": "^0.7.0",
     "react-ionicons": "^1.5.7",
     "reactstrap": "^4.6.2",
@@ -19,7 +20,6 @@
     "pg": "^6.2.2"
   },
   "devDependencies": {
-    "react-router-dom": "^4.1.1",
     "react-scripts": "1.0.2",
     "babel-preset-node6": "11.0.0",
     "babel-cli": "6.18.0",
