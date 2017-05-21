@@ -42,4 +42,7 @@ const Format = bookshelf.Model.extend({
   tableName: 'formats',
 });
 
-export default Book
+export {
+  Book,
+  Library
+}

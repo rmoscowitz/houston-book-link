@@ -1,6 +1,6 @@
 var express = require('express')
 var app = express()
-var search = require('./pg_service');
+import { search, libraries } from './pg_service';
 
 
 app.get('/', function(req, res) {
@@ -8,20 +8,15 @@ app.get('/', function(req, res) {
 });
 
 app.get('/libraries', function(req, res) {
-  console.log('Retrieving mock libraries data');
-  // TODO flesh this out
-  res.send({
-    lib: 1
-  });
+  libraries().then(libs => res.send(libs))
 });
 
 app.get('/search', function(req, res) {
-  // TODO merge query params with request params
   var params = {
-    search: 'some query',
-    libraries: [1, 2],
-    limit: 10,
-    offset: 0
+    search: req.query.search || '',
+    libraries: (req.query.libraries || []).split(","),
+    limit: req.query.limit || 20,
+    offset: req.query.offset || 0
   }
   search(params).then((data) => {
     res.send(data)
@@ -30,4 +25,4 @@ app.get('/search', function(req, res) {
 
 app.listen(4000, function () {
   console.log('Example app listening on port 4000!')
-})
+ })
