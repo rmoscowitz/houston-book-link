@@ -1,13 +1,13 @@
 import { Book, Library, bookshelf } from './models'
 
 export const search = (params) => {
-  // TODO where libraries
-  // TODO fetch page
   const BookCollection = bookshelf.Collection.extend({
     model: Book
   })
   return new BookCollection().query(function(qb) {
+    qb.innerJoin('library_books', 'books.id', 'library_books.book_id');
     qb.whereRaw(`tsv @@ plainto_tsquery('${params.search}')`)
+    qb.whereIn('library_books.library_id', params.libraries)
     qb.limit(params.limit)
     qb.offset(params.offset)
   }).fetch({
