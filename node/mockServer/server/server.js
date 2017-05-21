@@ -1,4 +1,9 @@
-import {getMockLibraries,getMockSearch, getMockSingleSearch} from './setupMockServer.js';
+import {
+  getMockLibraries,
+  getMockSearch,
+  getMockAuthorSearch,
+  getMockTitleSearch
+ } from './setupMockServer.js';
 
 var express = require('express')
 var app = express()
@@ -18,7 +23,12 @@ app.get('/search', function(req, res) {
   console.log('Performing mock search');
   if(req.query.author)
   {
-    getMockSingleSearch().then((data) => {
+    getMockAuthorSearch().then((data) => {
+      res.send(data);
+    });
+  } else if(req.query.title)
+  {
+    getMockTitleSearch().then((data) => {
       res.send(data);
     });
   }

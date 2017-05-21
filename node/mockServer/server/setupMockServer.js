@@ -1,6 +1,7 @@
 
 import libraryData from './data/libraries.json';
-import singleSearch from './data/Laut_single_search.json';
+import authorSearch from './data/Laut_single_search.json';
+import titleSearch from './data/Fenn_single_search.json';
 import search from './data/search.json';
 import delay from './delay.js';
 
@@ -18,10 +19,17 @@ exports.getMockSearch = () => {
     }, delay());
   });
 };
-exports.getMockSingleSearch = () => {
+exports.getMockAuthorSearch = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(singleSearch);
+      resolve(authorSearch);
+    }, delay());
+  });
+};
+exports.getMockTitleSearch = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(titleSearch);
     }, delay());
   });
 };
