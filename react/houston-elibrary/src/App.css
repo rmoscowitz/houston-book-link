@@ -34,6 +34,9 @@
   background-color: #646ba7;
   border: none;
   color: white;
+    -webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+  border-radius: 0px;
 }
 
 .navbar li {
@@ -53,6 +56,8 @@
 
 .navbar-collapse {
   border-top: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 
 .nav-item a:hover {
@@ -61,6 +66,10 @@
 
 .nav-item:hover {
   background-color: white;
+}
+
+.train {
+  min-width: 128px;
 }
 
 /*About*/
@@ -159,9 +168,13 @@
 .search-container input {
   margin-top: 20px;
   width: 90%;
+  max-width: 800px;
   height: 45px;
   padding-left: 10px;
   border: 1px solid darkgray;
+  -moz-box-shadow:    0px 0px 4px 0px #8879b9;
+  -webkit-box-shadow: 0px 0px 4px 0px #8879b9;
+  box-shadow:         0px 0px 4px 0px #8879b9;
 }
 
 .search-container input:focus{

@@ -77,6 +77,7 @@ class Home extends React.Component {
                 <Search selectedLibraries={this.state.libraries}
                         ref={(search) => { this.searchRef = search; }}/>
             </div>
+
         )
     }
 }

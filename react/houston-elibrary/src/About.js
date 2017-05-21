@@ -8,6 +8,7 @@ import dylan from './dylan.png';
 import daniel from './daniel.png';
 import eric from './eric.png';
 import elaine from './elaine.png';
+import train from './train.png';
 
 class About extends React.Component {
   constructor(props) {
@@ -92,6 +93,14 @@ class About extends React.Component {
                     <img className="media-object" src={elaine} width="128" alt="cameron" />
                     <a href="https://github.com/imalooney">Elaine</a>
                 </div>
+            </div>
+            <div className="row row-media">
+                <div className="col-sm-12">
+                    <h2>Houston Book Link!</h2>
+                </div>
+				<div className="col-xs-12 col-sm-2 col-sm-offset-5">
+					<img className="media-object train" src={train} alt="train coming out of computer" width="48"/>
+				</div>
             </div>
 	    </div>	
     );
