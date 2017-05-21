@@ -2,7 +2,7 @@ import React from 'react';
 import harrisCard from './harris-co-cards.png'
 import houstonCard from './houston-card.png'
 
-class FAQ extends React.Component {
+class Resources extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,4 +39,4 @@ class FAQ extends React.Component {
   }
 }
 
-export default FAQ;
+export default Resources;
