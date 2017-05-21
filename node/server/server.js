@@ -8,11 +8,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/libraries', function(req, res) {
-  console.log('Retrieving mock libraries data');
-  // TODO flesh this out
-  res.send({
-    lib: 1
-  });
+  libraries().then(libs => res.send(libs))
 });
 
 app.get('/search', function(req, res) {
@@ -29,4 +25,4 @@ app.get('/search', function(req, res) {
 
 app.listen(4000, function () {
   console.log('Example app listening on port 4000!')
-})
+ })

@@ -1,4 +1,4 @@
-import Book from './models'
+import { Book, Library } from './models'
 
 export const search = (params) => {
   // TODO where libraries
@@ -26,5 +26,7 @@ export const search = (params) => {
 }
 
 export const libraries = () => {
-  console.log("fill me in")
+  return Library.fetchAll().then((libraries) => {
+    return libraries.map(l => l.toJSON());
+  })
 }
