@@ -6,7 +6,7 @@ class Card extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: false,
+            selected: true,
         };
         this._onCardClick = this._onCardClick.bind(this);
     }

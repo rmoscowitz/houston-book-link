@@ -12,8 +12,8 @@ class Home extends React.Component {
         super(props)
 
         this.state = {
-            harris: false,
-            houston: false,
+            harris: true,
+            houston: true,
         }
 
         this.select = this.select.bind(this)

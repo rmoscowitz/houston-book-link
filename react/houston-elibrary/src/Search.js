@@ -1,15 +1,27 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 
+import sampleCoverImage from './sample-book-cover.jpg'
+
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion.title;
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
-    <div>
-        {suggestion.title}
+    <div className="result row">
+        <div className="col-2">
+            <img src={sampleCoverImage}
+                 alt={suggestion.title}/>
+        </div>
+        <div className="result-details col-10">
+            <span className="title">{suggestion.title}</span>
+            <br/>
+            <span>by&nbsp;</span>{suggestion.primaryCreatorName}
+            <br/>
+            {suggestion.mediaType}
+        </div>
     </div>
 );
 

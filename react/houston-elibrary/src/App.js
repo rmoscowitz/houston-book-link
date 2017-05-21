@@ -9,6 +9,7 @@ import {
 import About from './About';
 import Home from './Home';
 import Menu from './Menu';
+import LibraryCards from './LibraryCards';
 
 
 class App extends React.Component {
@@ -40,6 +41,7 @@ class App extends React.Component {
                     <div id="main">
                         <Route exact path="/" component={Home}/>
                         <Route path ="/about" component={About}/>
+                        <Route path ="/librarycards" component={LibraryCards}/>
                     </div>
                 </div>
             </Router>
