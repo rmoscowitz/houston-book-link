@@ -10,6 +10,7 @@ class Home extends React.Component {
             <div className="sidenav">
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
+                <Link to="/librarycards">Library Cards</Link>
             </div>
         )
     }

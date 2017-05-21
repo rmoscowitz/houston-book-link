@@ -59,27 +59,27 @@ class About extends React.Component {
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={cameron} width="128" alt="cameron" />
-		    		<h5>Cameron</h5>
+		    		<p>Cameron</p>
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={robyn} width="128" alt="robyn" />
-		    		<h5>Robyn</h5>
+		    		<p>Robyn</p>
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={daniel} width="128" alt="dan" />
-		    		<h5>Dan</h5>
+		    		<p>Dan</p>
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={dylan} width="128" alt="dylan" />
-		    		<h5>Dylan</h5>
+		    		<p>Dylan</p>
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={christian} width="128" alt="christian" />
-		    		<h5>Christian</h5>
+		    		<p>Christian</p>
 		    	</div>
 		    	<div className="col-sm-2">
 		    		<img className="media-object" src={eric} width="128" alt="eric" />
-		    		<h5>Eric</h5>
+		    		<p>Eric</p>
 		    	</div>
 		    </div>
 	    </div>	
