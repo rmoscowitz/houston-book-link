@@ -182,13 +182,15 @@
 }
 
 .search-container ul {
-  padding-left: 5%;
+  padding-left: 0;
   margin-right: 5%;
   list-style-type: none;
   text-align: left;
   overflow-x: hidden;
   overflow-y: auto;
-  /*height: 200px;*/
+  max-width: 800px;
+  margin: auto;
+  width: 90%;
 }
 
 .search-container li .result {
