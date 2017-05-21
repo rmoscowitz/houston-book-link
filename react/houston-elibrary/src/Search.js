@@ -22,6 +22,10 @@ class Search extends React.Component {
         this.renderCheckoutInfo = this.renderCheckoutInfo.bind(this)
     }
 
+    focus() {
+        this.autoSuggest.input.focus()
+    }
+
     onChange = (event, {newValue}) => {
         this.setState({
             value: newValue
@@ -116,6 +120,7 @@ class Search extends React.Component {
         return (
             <div className="search-container">
                 <Autosuggest
+                    ref={(autoSuggest) => { this.autoSuggest = autoSuggest; }}
                     suggestions={suggestions}
                     onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                     onSuggestionsClearRequested={this.onSuggestionsClearRequested}

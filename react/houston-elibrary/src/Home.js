@@ -48,7 +48,9 @@ class Home extends React.Component {
             }
             return library;
         });
-        this.setState({ libraries });
+        this.setState({ libraries }, () => {
+            this.searchRef.focus();
+        });
     }
 
     renderCards(libraries) {
@@ -72,7 +74,8 @@ class Home extends React.Component {
                     {cards}
                 </div>
 
-                <Search selectedLibraries={this.state.libraries}/>
+                <Search selectedLibraries={this.state.libraries}
+                        ref={(search) => { this.searchRef = search; }}/>
             </div>
         )
     }
