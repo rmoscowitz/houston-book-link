@@ -1,5 +1,7 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import { debounce as _debounce } from 'lodash';
+import loadingGIF from './loading.gif';
 
 import sampleCoverImage from './DefaultBook.png'
 
@@ -15,11 +17,13 @@ class Search extends React.Component {
         this.state = {
             value: '',
             suggestions: [],
+            loading: false,
         };
 
         this.getSuggestionValue = this.getSuggestionValue.bind(this)
         this.renderSuggestion = this.renderSuggestion.bind(this)
         this.renderCheckoutInfo = this.renderCheckoutInfo.bind(this)
+        this.debouncedLoadSuggestions = _debounce(this.loadSuggestions, 500);
     }
 
     focus() {
@@ -83,6 +87,11 @@ class Search extends React.Component {
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
     onSuggestionsFetchRequested = ({value}) => {
+        this.setState({loading: true})
+        this.debouncedLoadSuggestions(value)
+    };
+
+    loadSuggestions = (value) => {
         const selectedIds = this.props.selectedLibraries
             .filter(library => library.selected)
             .map(library => library.id);
@@ -92,14 +101,17 @@ class Search extends React.Component {
                 response.json().then(data => {
                     if (data.length) {
                         this.setState({
-                            suggestions: data
+                            suggestions: data,
+                            loading: false,
                         }, () => {
                             // console.log(this.state.suggestions);
                         });
+                    } else {
+                        this.setState({loading: false})
                     }
                 })
             });
-    };
+    }
 
     // Autosuggest will call this function every time you need to clear suggestions.
     onSuggestionsClearRequested = () => {
@@ -109,7 +121,7 @@ class Search extends React.Component {
     };
 
     render() {
-        const {value, suggestions} = this.state;
+        const {value, suggestions, loading} = this.state;
 
         const inputProps = {
             placeholder: 'Search for e-books and audiobooks...',
@@ -128,6 +140,8 @@ class Search extends React.Component {
                     renderSuggestion={this.renderSuggestion}
                     inputProps={inputProps}
                 />
+            {loading ? <img className="media-object" style={{margin: "auto"}} src={loadingGIF} width="100" alt="loading" /> : null}
+            {value && !suggestions.length && !loading ? <p>Oh no! No suggestions! Try changing your search.</p> : null }
             </div>
         );
     }
