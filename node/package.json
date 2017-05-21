@@ -16,5 +16,8 @@
     "webpack": "2.4.1"
   },
   "dependencies": {
+    "bookshelf": "^0.10.3",
+    "knex": "^0.13.0",
+    "pg": "^6.2.2"
   }
 }

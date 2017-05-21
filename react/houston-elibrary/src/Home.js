@@ -2,6 +2,7 @@
 import React from 'react'
 
 import Card from './Card'
+import Search from './Search'
 
 import harrisCard from './harris-co-cards.png'
 import houstonCard from './houston-card.png'
@@ -11,8 +12,8 @@ class Home extends React.Component {
         super(props)
 
         this.state = {
-            harris: false,
-            houston: false,
+            harris: true,
+            houston: true,
         }
 
         this.select = this.select.bind(this)
@@ -40,7 +41,7 @@ class Home extends React.Component {
                           select={this.select}/>
                 </div>
 
-                { /* search */ }
+                <Search />
             </div>
         )
     }
