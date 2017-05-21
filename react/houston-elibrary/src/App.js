@@ -1,4 +1,5 @@
 import './App.css';
+
 import React from 'react';
 import {
     BrowserRouter as Router,
@@ -20,11 +21,9 @@ class App extends React.Component {
     }
 
     _onButtonClick() {
-        console.log('onbuttonclick');
         this.setState({
             showNav: !this.state.showNav
         });
-        console.log(this.state)
     }
 
     render() {
@@ -40,7 +39,7 @@ class App extends React.Component {
 
                     <div id="main">
                         <Route exact path="/" component={Home}/>
-                        <Route path="/about" component={About}/>
+                        <Route path ="/about" component={About}/>
                     </div>
                 </div>
             </Router>

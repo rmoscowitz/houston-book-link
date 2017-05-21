@@ -1,11 +1,8 @@
 from sqlalchemy import create_engine
 
 from models import Base
+from db_config import CONN
 
-USER = "dylan"
-PASSWORD = ""
-DBNAME = "mydb"
-CONN = create_engine("postgresql+psycopg2://{}:{}@/{}".format(USER, PASSWORD, DBNAME))
 
 Base.metadata.drop_all(CONN)
 Base.metadata.create_all(CONN)
