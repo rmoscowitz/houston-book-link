@@ -1,4 +1,3 @@
-// import PropTypes from 'react'
 import React from 'react'
 
 import Card from './Card'
@@ -12,36 +11,68 @@ class Home extends React.Component {
         super(props)
 
         this.state = {
-            harris: true,
-            houston: true,
+            libraries: []
         }
 
         this.select = this.select.bind(this)
     }
 
-    select(propName, value) {
-        const newState = {};
-        newState[propName] = value;
-        this.setState(newState);
+    componentWillMount() {
+        const getImagePath = (libraryName) => {
+            const imagePaths = { // lol
+                "Houston Area Public Library": houstonCard,
+                "Harris County Area Library": harrisCard,
+            };
+            return imagePaths[libraryName];
+        };
+
+        fetch(`/libraries`)
+            .then(response => {
+                response.json().then(libraries => {
+                    this.setState({
+                        libraries: libraries.map(library => {
+                            return Object.assign(library, {
+                                selected: true,
+                                imagePath: getImagePath(library.name),
+                            });
+                        })
+                    });
+                })
+            });
+    }
+
+    select(libraryId, value) {
+        const libraries = this.state.libraries.map(library => {
+            if (library.id === libraryId) {
+                library.selected = value;
+            }
+            return library;
+        });
+        this.setState({ libraries });
+    }
+
+    renderCards(libraries) {
+        return libraries.map((library, index) => (
+            <Card key={index}
+                  imagePath={library.imagePath}
+                  imageAltText={library.name}
+                  libraryId={library.id}
+                  select={this.select}/>
+        ));
     }
 
     render() {
+        const cards = this.renderCards(this.state.libraries);
+
         return (
             <div>
                 <div>Choose your library cards...</div>
 
                 <div className="card-container">
-                    <Card imagePath={houstonCard}
-                          imageAltText='Houston Public Library Card'
-                          libraryId='houston'
-                          select={this.select}/>
-                    <Card imagePath={harrisCard}
-                          imageAltText='Harris County Library Cards'
-                          libraryId='harris'
-                          select={this.select}/>
+                    {cards}
                 </div>
 
-                <Search />
+                <Search selectedLibraries={this.state.libraries}/>
             </div>
         )
     }

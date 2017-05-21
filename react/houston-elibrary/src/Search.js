@@ -26,8 +26,8 @@ const renderSuggestion = suggestion => (
 );
 
 class Search extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         // Autosuggest is a controlled component.
         // This means that you need to provide an input value
@@ -36,7 +36,7 @@ class Search extends React.Component {
         // and they are initially empty because the Autosuggest is closed.
         this.state = {
             value: '',
-            suggestions: []
+            suggestions: [],
         };
     }
 
@@ -49,6 +49,11 @@ class Search extends React.Component {
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
     onSuggestionsFetchRequested = ({value}) => {
+        const selectedIds = this.props.selectedLibraries
+            .filter(library => library.selected)
+            .map(library => library.id);
+
+        // fetch(`/search?libraries=${selectedIds.join(',')}`)
         fetch(`/search`)
             .then(response => {
                 response.json().then(data => {

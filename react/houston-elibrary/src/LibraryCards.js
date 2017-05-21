@@ -22,13 +22,13 @@ class LibraryCards extends React.Component {
 	      	<h1>Library Cards</h1>
 		    <div className="row media">
 		    	<div className="col-sm-6 media-middle">
-		    		<a href="http://houstonlibrary.org/library-card-registration" target="_blank">
+		    		<a href="http://houstonlibrary.org/library-card-registration">
 		    			<img className="media-object" src={houstonCard} alt="Houston library card" height="256"/>
 		    		</a>
 		    		<h5>Get your Houston library card!</h5>
 		    	</div>
 		    	<div className="col-sm-6 media-middle">
-		    		<a href="http://www.hcpl.net/about/library-cards" target="_blank">
+		    		<a href="http://www.hcpl.net/about/library-cards">
 		    			<img className="media-object" src={harrisCard} alt="Harris County library card" height="256"/>
 		    		</a>
 		    		<h5>Get your Houston library card!</h5>
