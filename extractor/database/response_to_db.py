@@ -11,74 +11,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql.expression import ClauseElement
 
 from models import Library, Book, BookFormat, Format, LibraryBook
-
-"""
-{
-  "primaryCreator": {
-    "role": "Author",
-    "name": "Homer"
-  },
-  "dateAdded": "2013-11-25T18:00:00-05:00",
-  "links": {
-    "self": {
-      "href": "http://api.overdrive.com/v1/collections/v1L1BLQAAAA2p/products/f3b6716c-b1f5-4fea-a63c-906aa6f6de1a",
-      "type": "application/vnd.overdrive.api+json"
-    },
-    "availability": {
-      "href": "http://api.overdrive.com/v1/collections/v1L1BLQAAAA2p/products/f3b6716c-b1f5-4fea-a63c-906aa6f6de1a/availability",
-      "type": "application/vnd.overdrive.api+json"
-    },
-    "metadata": {
-      "href": "http://api.overdrive.com/v1/collections/v1L1BLQAAAA2p/products/f3b6716c-b1f5-4fea-a63c-906aa6f6de1a/metadata",
-      "type": "application/vnd.overdrive.api+json"
-    }
-  },
-  "title": "The  <I>Odyssey</I>",
-  "series": "Johns Hopkins New Translations from Antiquity",
-  "formats": [
-    {
-      "id": "ebook-epub-adobe",
-      "name": "Adobe EPUB eBook"
-    },
-    {
-      "id": "ebook-overdrive",
-      "name": "OverDrive Read"
-    }
-  ],
-  "mediaType": "eBook",
-  "starRating": 4.2,
-  "contentDetails": [
-    {
-      "account": {
-        "id": 1356,
-        "name": "Houston Area Digital Media Catalog (TX)"
-      },
-      "href": "http://hadc.lib.overdrive.com/ContentDetails.htm?ID=f3b6716c-b1f5-4fea-a63c-906aa6f6de1a",
-      "type": "text/html"
-    }
-  ],
-  "sortTitle": " Odyssey",
-  "images": {
-    "cover150Wide": {
-      "href": "https://img1.od-cdn.com/ImageType-150/3161-1/F3B/671/6C/{F3B6716C-B1F5-4FEA-A63C-906AA6F6DE1A}Img150.jpg",
-      "type": "image/jpeg"
-    },
-    "cover300Wide": {
-      "href": "https://img1.od-cdn.com/ImageType-400/3161-1/F3B/671/6C/{F3B6716C-B1F5-4FEA-A63C-906AA6F6DE1A}Img400.jpg",
-      "type": "image/jpeg"
-    },
-    "cover": {
-      "href": "https://img1.od-cdn.com/ImageType-100/3161-1/{F3B6716C-B1F5-4FEA-A63C-906AA6F6DE1A}Img100.jpg",
-      "type": "image/jpeg"
-    },
-    "thumbnail": {
-      "href": "https://img1.od-cdn.com/ImageType-200/3161-1/{F3B6716C-B1F5-4FEA-A63C-906AA6F6DE1A}Img200.jpg",
-      "type": "image/jpeg"
-    }
-  },
-  "id": "f3b6716c-b1f5-4fea-a63c-906aa6f6de1a"
-}
-"""
+from db_config import CONN
 
 LIBRARY_MAP = {
     "v1L1BLQAAAA2p": 1,
@@ -99,17 +32,11 @@ FORMAT_MAP = {
     "ebook-epub-open": 11
 }
 
-
-USER = "dylan"
-PASSWORD = ""
-DBNAME = "mydb"
-CONN = create_engine("postgresql+psycopg2://{}:{}@/{}".format(USER, PASSWORD, DBNAME))
 session = sessionmaker(bind=CONN)()
-
 
 def run():
     t0 = time.time()
-    for i, path in enumerate(glob.glob("../../extractor/response_data/*.json")):
+    for i, path in enumerate(glob.glob("./extractor/response_data/*.json")):
         process_file(path)
         print "Elapsed time after {} files is {}".format(i, time.time() - t0)
 
@@ -119,8 +46,6 @@ def process_file(path):
     lib_id = LIBRARY_MAP[data["id"]]
     for i, p in enumerate(data["products"]):
         store_product(p, lib_id)
-
-
 
 def store_product(p, lib_id):
     book, _ = get_or_create(session, Book, **dict(
@@ -154,8 +79,6 @@ def store_product(p, lib_id):
     session.add(book)
     session.commit()
 
-
-
 def get_or_create(session, model, defaults=None, **kwargs):
     instance = session.query(model).filter_by(**kwargs).first()
     if instance:
@@ -166,11 +89,6 @@ def get_or_create(session, model, defaults=None, **kwargs):
         instance = model(**params)
         session.add(instance)
         return instance, True
-
-
-
-
-
 
 if __name__ == "__main__":
     run()
