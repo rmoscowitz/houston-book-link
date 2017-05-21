@@ -12,6 +12,8 @@ const dbname = process.env.PG_DBNAME !== undefined
     ? process.env.PG_DBNAME
     : 'postgres'
 
+console.log(user, password, dbname);
+
 const knex = require('knex')({
   client: 'pg',
   connection: {

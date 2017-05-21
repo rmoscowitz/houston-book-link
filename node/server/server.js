@@ -3,10 +3,6 @@ var app = express()
 import { search, libraries } from './pg_service';
 
 
-app.get('/', function(req, res) {
-  res.send('Mock eLibrary api server');
-});
-
 app.get('/libraries', function(req, res) {
   libraries().then(libs => res.send(libs))
 });
@@ -21,7 +17,10 @@ app.get('/search', function(req, res) {
   search(params).then(data => {
     res.send(data)
   });
+});
 
+app.get('*', function(req, res) {
+  res.send(express.static('../react/houston-elibrary/build'));
 });
 
 app.listen(4000, function () {
