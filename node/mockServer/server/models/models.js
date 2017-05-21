@@ -48,9 +48,9 @@ var Library = bookshelf.Model.extend({
   }
 });
 
-Book.where('id', 1).fetch({withRelated: ['libraries']}).then(function(book) {
-  debugger
-  console.log(book.toJSON());
+Book.where('id', 1).fetch({withRelated: ['libraries', 'libraryBooks']}).then(function(book) {
+  console.log(book.related("libraries").toJSON());
+  console.log(book.related("libraryBooks").toJSON());
 }).catch(function(err) {
   console.error(err);
 });
