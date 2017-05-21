@@ -2,7 +2,7 @@ var knex = require('knex')({
   client: 'pg',
   connection: {
     host     : 'localhost',
-    user     : 'dylan',
+    user     : 'calexander',
     password : '',
     database : 'mydb',
     charset  : 'utf8'
@@ -18,39 +18,35 @@ var Book = bookshelf.Model.extend({
   },
   libraryBooks: function() {
     return this.hasMany(LibraryBook);
+  },
+  formats: function() {
+    return this.hasMany(Format, 'format_id').through(BookFormat, 'id');
   }
 });
 
 var LibraryBook = bookshelf.Model.extend({
   tableName: 'library_books',
-  libraries: function() {
-    return this.hasMany(Library);
-  }
-  // books: function() {
-  //   return this.hasOne(Book);
-  //   // return this.belongsTo(Book);
-  //   // return this.belongsTo(Book, 'library_books_book_id_fkey');
-  // },
-  // libraries: function() {
-  //   return this.hasOne(Library);
-    // return this.belongsTo(Library);
-    // return this.belongsTo(Library, 'library_books_library_id_fkey');
-  // },
 });
 
 var Library = bookshelf.Model.extend({
   tableName: 'libraries',
-  libraryBooks: function() {
-    return this.belongsTo(LibraryBook);
-  },
-  books: function() {
-    return this.belongsTo(Book).through(LibraryBook, 'library_books_library_id_fkey')
-  }
 });
 
-Book.where('id', 1).fetch({withRelated: ['libraries', 'libraryBooks']}).then(function(book) {
+var BookFormat = bookshelf.Model.extend({
+    tableName: 'book_formats',
+});
+
+var Format = bookshelf.Model.extend({
+  tableName: 'formats',
+});
+
+/*
+Book.where('id', 1).fetch({withRelated: ['libraries', 'libraryBooks', 'formats']}).then(function(book) {
+  debugger;
   console.log(book.related("libraries").toJSON());
+  console.log(book.related("libraryBooks").toJSON());
   console.log(book.related("libraryBooks").toJSON());
 }).catch(function(err) {
   console.error(err);
 });
+*/
