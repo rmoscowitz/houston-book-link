@@ -69,3 +69,18 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+
+/*About*/
+.row{
+  padding: 100px 30px 40px 30px;
+  vertical-align: middle;
+}
+
+img {max-width: 100%}
+
+.col-sm-6 {
+  vertical-align: middle !important;
+}
+
+
