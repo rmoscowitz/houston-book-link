@@ -44,11 +44,10 @@ const LibraryBook = bookshelf.Model.extend({
 
 const Library = bookshelf.Model.extend({
   tableName: 'libraries',
-  tableName: 'libraries',
 });
 
 const BookFormat = bookshelf.Model.extend({
-    tableName: 'book_formats',
+  tableName: 'book_formats',
 });
 
 const Format = bookshelf.Model.extend({

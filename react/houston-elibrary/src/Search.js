@@ -1,29 +1,42 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 
-import sampleCoverImage from './sample-book-cover.jpg'
+import sampleCoverImage from './DefaultBook.png'
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
 const getSuggestionValue = suggestion => suggestion.title;
 
-// Use your imagination to render suggestions.
-const renderSuggestion = suggestion => (
-    <div className="result row">
-        <div className="col-2">
-            <img src={sampleCoverImage}
-                 alt={suggestion.title}/>
+
+const renderCheckoutInfo = locations => {
+    return locations.map((location, index) => (
+        <a key={index} href={location.overdrive_href}>Available at {location.library_name}<br /></a>
+    ));
+}
+
+const renderSuggestion = suggestion => {
+    const checkout = locations => renderCheckoutInfo(locations);
+
+    return (
+        <div className="result row">
+            <div className="col-2">
+                <img src={suggestion.img_thumbnail || sampleCoverImage}
+                     alt={suggestion.title}/>
+            </div>
+            <div className="result-details col-5">
+                <span className="title">{suggestion.title}</span>
+                <br/>
+                <span>by&nbsp;</span>{suggestion.primary_creator_name}
+                <br/>
+                {suggestion.media_type}
+            </div>
+            <div className="checkout-info col-5">
+                { checkout(suggestion.locations) }
+            </div>
         </div>
-        <div className="result-details col-10">
-            <span className="title">{suggestion.title}</span>
-            <br/>
-            <span>by&nbsp;</span>{suggestion.primaryCreatorName}
-            <br/>
-            {suggestion.mediaType}
-        </div>
-    </div>
-);
+    );
+}
 
 class Search extends React.Component {
     constructor(props) {
@@ -53,14 +66,16 @@ class Search extends React.Component {
             .filter(library => library.selected)
             .map(library => library.id);
 
-        fetch(`/search?search=${value}&libraries=${selectedIds.join(',')}`)
+        fetch(`/search?search=${encodeURIComponent(value)}&libraries=${selectedIds.join(',')}`)
             .then(response => {
                 response.json().then(data => {
-                    this.setState({
-                        suggestions: data.products
-                    }, () => {
-                        console.log(this.state.suggestions);
-                    });
+                    if (data.length) {
+                        this.setState({
+                            suggestions: data
+                        }, () => {
+                            // console.log(this.state.suggestions);
+                        });
+                    }
                 })
             });
     };

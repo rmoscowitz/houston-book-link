@@ -26,6 +26,10 @@
   color: #4c3e7b;
 }
 
+.main-container {
+  padding: 20px;
+}
+
 /*About*/
 .about-container .row {
   padding: 30px;
@@ -168,5 +172,6 @@
     font-weight: bold;
 }
 
-.search-container li .result .author {
+.search-container li .result .checkout-info {
+  padding: 5px;
 }
