@@ -18,9 +18,9 @@ const renderSuggestion = suggestion => (
         <div className="result-details col-10">
             <span className="title">{suggestion.title}</span>
             <br/>
-            <span>by&nbsp;</span>{suggestion.primaryCreatorName}
+            <span>by&nbsp;</span>{suggestion.primary_creator_name}
             <br/>
-            {suggestion.mediaType}
+            {suggestion.media_type}
         </div>
     </div>
 );
@@ -53,14 +53,16 @@ class Search extends React.Component {
             .filter(library => library.selected)
             .map(library => library.id);
 
-        fetch(`/search?search=${value}&libraries=${selectedIds.join(',')}`)
+        fetch(`/search?search=${encodeURIComponent(value)}&libraries=${selectedIds.join(',')}`)
             .then(response => {
                 response.json().then(data => {
-                    this.setState({
-                        suggestions: data.products
-                    }, () => {
-                        console.log(this.state.suggestions);
-                    });
+                    if (data.length) {
+                        this.setState({
+                            suggestions: data
+                        }, () => {
+                            // console.log(this.state.suggestions);
+                        });
+                    }
                 })
             });
     };

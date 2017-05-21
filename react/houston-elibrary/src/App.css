@@ -26,6 +26,10 @@
   color: #4c3e7b;
 }
 
+.main-container {
+  padding: 20px;
+}
+
 /*About*/
 .about-container .row {
   padding: 30px;
