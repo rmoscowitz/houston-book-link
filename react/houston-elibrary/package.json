@@ -9,7 +9,8 @@
     "react-addons-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
     "react-foundation": "^0.7.0",
-    "reactstrap": "^4.6.2"
+    "reactstrap": "^4.6.2",
+    "react-ionicons": "^1.5.7"
   },
   "devDependencies": {
     "react-router-dom": "^4.1.1",

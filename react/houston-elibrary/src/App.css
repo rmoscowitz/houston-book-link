@@ -21,7 +21,6 @@
   right: 20px;
 }
 
-/* The side navigation menu */
 .sidenav {
   height: 100%;
   width: 200px;
@@ -34,7 +33,6 @@
   transition: 0.5s;
 }
 
-/* The navigation menu links */
 .sidenav a {
   padding: 5px;
   text-decoration: none;
@@ -44,12 +42,10 @@
   transition: 0.3s
 }
 
-/* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .offcanvas a:focus{
   color: #dfdfdf;
 }
 
-/* Position and style the close button (top right corner) */
 .sidenav .closebtn {
   position: absolute;
   top: 0;
@@ -58,29 +54,90 @@
   margin-left: 50px;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left .5s;
   padding: 20px;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
 
-
 /*About*/
-.row{
+.about-container .row{
   padding: 100px 30px 40px 30px;
   vertical-align: middle;
 }
 
-img {max-width: 100%}
+.about-container img {max-width: 100%}
 
-.col-sm-6 {
+.about-container .col-sm-6 {
   vertical-align: middle !important;
 }
 
+/* Home */
+.card-container {
+  display: inline-flex; /* err.... */
+  padding-top: 10px;
+}
 
+.card-container .card {
+  cursor: pointer;
+  margin: 10px;
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 150px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  -webkit-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card-container .card::after {
+  content: "";
+  border-radius: 5px;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  -webkit-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card-container .card:hover {
+  -webkit-transform: scale(1.25, 1.25);
+  transform: scale(1.05, 1.05);
+}
+
+.card-container .card:hover::after {
+  opacity: 1;
+}
+
+.card-container .card svg {
+  background-color: white;
+  position: absolute;
+  z-index: 1;
+}
+
+.card-container .card img {
+  margin: 10px;
+  width: 180px;
+  height: 130px;
+}
+
+.card-container .gray {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.card-container .card svg {
+  border-radius: 45px;
+}

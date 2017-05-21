@@ -1,4 +1,5 @@
 import './App.css';
+
 import React from 'react';
 import {
     BrowserRouter as Router,
@@ -20,11 +21,9 @@ class App extends React.Component {
     }
 
     _onButtonClick() {
-        console.log('onbuttonclick');
         this.setState({
             showNav: !this.state.showNav
         });
-        console.log(this.state)
     }
 
     render() {
