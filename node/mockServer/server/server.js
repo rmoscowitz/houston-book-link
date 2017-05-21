@@ -9,7 +9,7 @@ var express = require('express')
 var app = express()
 
 app.get('/', function(req, res) {
-  res.send('id: ' + req.query.id);
+  res.send('Mock eLibrary api server');
 });
 
 app.get('/libraries', function(req, res) {
