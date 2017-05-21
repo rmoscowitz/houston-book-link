@@ -19,8 +19,9 @@ class Home extends React.Component {
     }
 
     select(propName, value) {
-        // console.log(propName, value);
-        // this.setState();
+        const newState = {};
+        newState[propName] = value;
+        this.setState(newState);
     }
 
     render() {
