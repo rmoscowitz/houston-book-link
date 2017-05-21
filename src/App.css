@@ -27,7 +27,7 @@
 }
 
 .main-container {
-  padding: 20px;
+  padding: 20px 20px 80px 20px; /* 80px on bottom for footer */
 }
 
 .navbar {
@@ -70,6 +70,20 @@
 
 .train {
   min-width: 128px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #f5f5f5;
+  padding: 5px;
+}
+
+.footer-overdrive {
+  float: right;
+  margin-right: 10px;
 }
 
 /*About*/
@@ -213,7 +227,11 @@
   border: 1px solid darkgray;
   border-top: none;
   padding: 5px;
-  height: 100px;
+  height: 100px; /* safari */
+}
+
+.search-container li .result div {
+  height: 100%; /* safari */
 }
 
 .search-container li .result img {
