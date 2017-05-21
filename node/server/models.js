@@ -1,12 +1,24 @@
-// TODO read from ENV vars
+const os = require('os');
+
+const user = process.env.PG_USER !== undefined 
+    ? process.env.PG_USER
+    : os.userInfo().username 
+
+const password = process.env.PG_PASSWORD !== undefined
+    ? process.env.PG_PASSWORD
+    : ''
+
+const dbname = process.env.PG_DBNAME !== undefined
+    ? process.env.PG_DBNAME
+    : 'postgres'
 
 const knex = require('knex')({
   client: 'pg',
   connection: {
     host     : 'localhost',
-    user     : 'dylan',
-    password : '',
-    database : 'mydb',
+    user     : user,
+    password : password,
+    database : dbname,
     charset  : 'utf8'
   }
 });
