@@ -1,9 +1,9 @@
 import { search, libraries } from './pg_service';
 
-var express = require('express')
-var path = rquire('path'):
+var express = require('express');
+var path = rquire('path');
 
-var app = express()
+var app = express();
 
 
 
