@@ -1,25 +1,40 @@
 {
-  "name": "houston-elibrary-portal",
-  "version": "1.0.0",
-  "description": "Houston Hackathon 2017 Project",
-  "main": "node/server/server.js",
+  "name": "houston-book-links",
+  "version": "0.1.0",
+  "private": true,
+  "main": "server/index.js",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-addons-transition-group": "^15.5.2",
+    "react-autosuggest": "^9.0.1",
+    "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1",
+    "react-foundation": "^0.7.0",
+    "react-ionicons": "^1.5.7",
+    "reactstrap": "^4.6.2",
+    "lodash": "^4.17.4",
+    "bookshelf": "^0.10.3",
+    "knex": "^0.13.0",
+    "pg": "^6.2.2"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.2",
+    "babel-preset-node6": "11.0.0",
+    "babel-cli": "6.18.0",
+    "babel-core": "6.24.1",
+    "express": "4.15.2"
+  },
   "scripts": {
-    "preinstall": "cd react/houston-elibrary && npm set progress=false && npm install && cd ../../ && cd node && npm set progress=false && npm install",
-    "start-frontend": "cd react/houston-elibrary && npm start",
-    "start-backend": "cd node && npm start",
-    "start-extractor": "python extactor/main.py",
-    "start-db-import": "python create_tables.py && python response_to_db.py && python create_text_search_vectors.py",
-    "start-prod": "npm install && npm run start-frontend | npm run start-backend",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run start-backend & npm run start-frontend",
+    "debug": "babel-node debug server/index.js & npm run start-frontend",
+    "start-backend": "babel-node server/index.js",
+    "start-frontend": "react-scripts start",
+    "build": "react-scripts build && mkdir -p build/server && babel server -d build/server",
+    "prod": "npm run build && NODE_ENV='PRODUCTION' node build/server/index.js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rmoscowitz/houston-elibrary-portal.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rmoscowitz/houston-elibrary-portal/issues"
-  },
-  "homepage": "https://github.com/rmoscowitz/houston-elibrary-portal#readme"
+  "proxy": "http://localhost:4000"
 }
