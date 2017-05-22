@@ -1,7 +1,6 @@
 import { search, libraries } from './pg_service';
 
 var express = require('express')
-var path = require("path")
 
 var app = express()
 
@@ -23,12 +22,11 @@ app.get('/search', function(req, res) {
   });
 });
 
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
-app.use(express.static(path.resolve(__dirname, '..', 'public')));
+app.use(express.static('build'));
+app.use(express.static('public'));
 
 app.get('*', function(req, res) {
-  res.setHeader("Content-Type", "text/html");
-  res.send(express.static(path.resolve(__dirname, '..', 'build', 'index.html')));
+  res.send(express.static('build/index.html'));
 });
 
 app.listen(4000, function () {
