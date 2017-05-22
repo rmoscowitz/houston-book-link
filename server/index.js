@@ -26,9 +26,11 @@ app.use(express.static('build'));
 app.use(express.static('public'));
 
 app.get('*', function(req, res) {
-  res.send(express.static('build/index.html'));
+  res.sendFile(express.static('build/index.html'));
 });
 
-app.listen(4000, function () {
-  console.log('Example app listening on port 4000!')
- })
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, function () {
+  console.log(`Example app listening on port ${PORT}!`)
+});
