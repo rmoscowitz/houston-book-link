@@ -15,7 +15,7 @@
     "react-ionicons": "^1.5.7",
     "reactstrap": "^4.6.2",
     "lodash": "^4.17.4",
-	  "bookshelf": "^0.10.3",
+    "bookshelf": "^0.10.3",
     "knex": "^0.13.0",
     "pg": "^6.2.2"
   },
