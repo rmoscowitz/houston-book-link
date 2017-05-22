@@ -1,6 +1,10 @@
-var express = require('express')
-var app = express()
 import { search, libraries } from './pg_service';
+
+var express = require('express')
+var path = require("path")
+
+var app = express()
+
 
 
 app.get('/libraries', function(req, res) {
@@ -19,11 +23,11 @@ app.get('/search', function(req, res) {
   });
 });
 
-app.use(express.static('build'));
-app.use(express.static('public'));
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 app.get('*', function(req, res) {
-  res.send(express.static('../react/houston-elibrary/build'));
+  res.send(express.static(path.resolve(__dirname, '..', 'build', 'index.html')));
 });
 
 app.listen(4000, function () {
