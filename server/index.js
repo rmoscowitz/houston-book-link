@@ -27,6 +27,7 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 app.get('*', function(req, res) {
+  res.setHeader("Content-Type", "text/html");
   res.send(express.static(path.resolve(__dirname, '..', 'build', 'index.html')));
 });
 
