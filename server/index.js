@@ -1,6 +1,7 @@
 import { search, libraries } from './pg_service';
 
 var express = require('express')
+var path = rquire('path'):
 
 var app = express()
 
@@ -26,7 +27,7 @@ app.use(express.static('build'));
 app.use(express.static('public'));
 
 app.get('*', function(req, res) {
-  res.sendFile(express.static('build/index.html'));
+  res.sendFile(path.resolve('build/index.html'));
 });
 
 const PORT = process.env.PORT || 4000;
