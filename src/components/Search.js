@@ -1,22 +1,17 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import { debounce as _debounce } from 'lodash';
-import loadingGIF from './loading.gif';
 
-import sampleCoverImage from './DefaultBook.png'
+import loadingGIF from '../images/loading.gif';
+import defaultBookCover from '../images/DefaultBook.png'
 
 class Search extends React.Component {
     constructor(props) {
         super(props);
 
-        // Autosuggest is a controlled component.
-        // This means that you need to provide an input value
-        // and an onChange handler that updates this value (see below).
-        // Suggestions also need to be provided to the Autosuggest,
-        // and they are initially empty because the Autosuggest is closed.
         this.state = {
-            value: '',
-            suggestions: [],
+            value: '',          // for autosuggest
+            suggestions: [],    // for autosuggest
             loading: false,
         };
 
@@ -60,13 +55,11 @@ class Search extends React.Component {
         const hasDuplicates = (array) => (new Set(array)).size !== array.length;
         const allLibs = [...selectedLibraries, ...suggestion.locations.map(location => location.library_id)];
 
-        // console.log(suggestion.title, allLibs, hasDuplicates(allLibs));
-
         if (hasDuplicates(allLibs)) {
             return (
                 <div className="result row">
                     <div className="col-2">
-                        <img src={suggestion.img_thumbnail || sampleCoverImage}
+                        <img src={suggestion.img_thumbnail || defaultBookCover}
                              alt={suggestion.title}/>
                     </div>
                     <div className="result-details col-5">
@@ -103,8 +96,6 @@ class Search extends React.Component {
                         this.setState({
                             suggestions: data,
                             loading: false,
-                        }, () => {
-                            // console.log(this.state.suggestions);
                         });
                     } else {
                         this.setState({loading: false})

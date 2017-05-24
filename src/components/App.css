@@ -89,11 +89,9 @@
 /*About*/
 .about-container .row {
   padding: 60px;
-  vertical-align: middle;
 }
 
 .about-container img {
-  display: block;
   margin: auto;
   width: 90%;
   max-width: 256px;

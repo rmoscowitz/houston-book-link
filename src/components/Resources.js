@@ -1,6 +1,6 @@
 import React from 'react';
-import harrisCard from './harris-co-cards.png'
-import houstonCard from './houston-card.png'
+import harrisCard from '../images/harris-co-cards.png'
+import houstonCard from '../images/houston-card.png'
 
 class Resources extends React.Component {
   constructor(props) {
@@ -23,15 +23,15 @@ class Resources extends React.Component {
 		    <div className="row media">
 		    	<div className="col-sm-6 media-middle">
 		    		<a href="http://houstonlibrary.org/library-card-registration">
+						<h5>Get a Houston Public Library card!</h5>
 		    			<img className="media-object" src={houstonCard} alt="Houston library card" />
 		    		</a>
-		    		<h5>Get your Houston library card!</h5>
 		    	</div>
 		    	<div className="col-sm-6 media-middle">
 		    		<a href="http://www.hcpl.net/about/library-cards">
+						<h5>Get a Harris County Library card!</h5>
 		    			<img className="media-object" src={harrisCard} alt="Harris County library card" />
 		    		</a>
-		    		<h5>Get your Houston library card!</h5>
 		    	</div>
 		    </div>
 	    </div>	

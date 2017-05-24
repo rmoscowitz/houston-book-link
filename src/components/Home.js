@@ -3,8 +3,8 @@ import React from 'react'
 import Card from './Card'
 import Search from './Search'
 
-import harrisCard from './harris-co-cards.png'
-import houstonCard from './houston-card.png'
+import harrisCard from '../images/harris-co-cards.png'
+import houstonCard from '../images/houston-card.png'
 
 class Home extends React.Component {
     constructor(props) {

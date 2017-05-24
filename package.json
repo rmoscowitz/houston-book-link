@@ -1,23 +1,21 @@
 {
-  "name": "houston-book-links",
+  "name": "houston-book-link",
   "version": "0.1.0",
   "private": true,
   "main": "server/index.js",
   "dependencies": {
+    "bookshelf": "^0.10.3",
     "bootstrap": "^4.0.0-alpha.6",
+    "knex": "^0.13.0",
+    "lodash": "^4.17.4",
+    "pg": "^6.2.2",
     "react": "^15.5.4",
-    "react-addons-css-transition-group": "^15.5.2",
-    "react-addons-transition-group": "^15.5.2",
     "react-autosuggest": "^9.0.1",
     "react-dom": "^15.5.4",
-    "react-router-dom": "^4.1.1",
-    "react-foundation": "^0.7.0",
     "react-ionicons": "^1.5.7",
-    "reactstrap": "^4.6.2",
-    "lodash": "^4.17.4",
-    "bookshelf": "^0.10.3",
-    "knex": "^0.13.0",
-    "pg": "^6.2.2"
+    "react-router-dom": "^4.1.1",
+    "react-transition-group": "^1.1.3",
+    "reactstrap": "^4.6.2"
   },
   "devDependencies": {
     "react-scripts": "1.0.2",

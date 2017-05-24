@@ -10,7 +10,7 @@ import About from './About';
 import Home from './Home';
 import Resources from './Resources';
 
-import overdrive from './overdrive.png';
+import overdrive from '../images/overdrive.png';
 
 import {
   Collapse,
