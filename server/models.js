@@ -52,5 +52,9 @@ const Format = bookshelf.Model.extend({
 export {
   Book,
   Library,
-  bookshelf
+  Format,
+  LibraryBook,
+  BookFormat,
+  bookshelf,
+  knex
 }

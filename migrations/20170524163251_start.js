@@ -14,6 +14,7 @@ exports.up = function(knex, Promise) {
       table.string('primary_creator_role');
       table.string('primary_creator_name');
       table.string('img_thumbnail');
+      table.string('img_cover');
       table.string('img_cover_150_wide');
       table.string('img_cover_300_wide');
     })

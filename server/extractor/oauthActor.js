@@ -1,7 +1,8 @@
 const request = require('request');
-const util = require('../util.js');
 
 /*
+const util = require('../util.js');
+
  const tokenUrl = "https://oauth.overdrive.com/token";
  const clientId = util.envOrElse("OVERDRIVE_CLIENT_ID", () => { 
  throw new Error("No client id specified");
@@ -11,7 +12,7 @@ const util = require('../util.js');
  });
  */
 
-exports.OauthActor = function (tokenUrl, clientSecret, clientId) {
+export const OauthActor = (tokenUrl, clientSecret, clientId) => {
   var token;
 
   return {
@@ -27,7 +28,7 @@ exports.OauthActor = function (tokenUrl, clientSecret, clientId) {
         });
       }
     },
-    _get: function() {
+    _get: function () {
       const ctx = this;
       const self = this.self.pick('?_get');
       const payload = {
@@ -35,7 +36,7 @@ exports.OauthActor = function (tokenUrl, clientSecret, clientId) {
         client_secret: clientSecret,
         grant_type: 'client_credentials'
       };
-      request.post(tokenUrl, { form: payload }, function(err, resp, bodyString) {
+      request.post(tokenUrl, { form: payload }, function (err, resp, bodyString) {
         if (err) return console.error('Failed to get oauth', err);
         if (resp && resp.statusCode === 200 && bodyString) {
           const body = JSON.parse(bodyString);
@@ -45,10 +46,12 @@ exports.OauthActor = function (tokenUrl, clientSecret, clientId) {
           setTimeout(function () {
             self._get(() => {});
           }, expiresInMillis);
+        } else {
+            console.error('Got error or empty response from oauth api ', body);
         }
       });
     },
-    setToken: function(newToken) {
+    setToken: function (newToken) {
       token = newToken;
     }
   };
