@@ -44,7 +44,9 @@ class App extends React.Component {
                     {/* Top Bar */}
                     <Navbar inverse toggleable>
                       <NavbarToggler right onClick={this.toggle} />
-                      <NavbarBrand href="/"><h2>Houston Book Link</h2></NavbarBrand>
+                      <NavbarBrand href="/">
+                          <h3>Houston Book Link</h3>
+                      </NavbarBrand>
                       <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                           <NavItem>
