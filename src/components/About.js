@@ -11,19 +11,6 @@ import elaine from '../images/elaine.png';
 import logo from '../images/logo3-purple.png';
 
 class About extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
-    };
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
   render() {
     return (
     	<div className="about-container">
@@ -107,7 +94,7 @@ class About extends React.Component {
 					<p>Email us at <a href="mailto:houstonbooklink@gmail.com?Subject=Website%20Feedback" target="_top">houstonbooklink@gmail.com</a> or find us on <a href="https://github.com/rmoscowitz/houston-elibrary-portal">Github</a>.</p>
 				</div>
             </div>
-	    </div>	
+	    </div>
     );
   }
 }

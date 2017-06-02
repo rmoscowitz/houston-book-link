@@ -3,19 +3,6 @@ import harrisCard from '../images/harris-co-cards.png'
 import houstonCard from '../images/houston-card.png'
 
 class Resources extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
-    };
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
   render() {
     return (
     	<div className="resources-container">
@@ -34,7 +21,7 @@ class Resources extends React.Component {
 		    		</a>
 		    	</div>
 		    </div>
-	    </div>	
+	    </div>
     );
   }
 }
