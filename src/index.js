@@ -1,10 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import ReactGA from 'react-ga';
+import createHistory from 'history/createBrowserHistory';
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import App from './components/App';
+
 import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
 
+ReactGA.initialize('UA-100392725-1');
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const history = createHistory();
+history.listen(location => {
+    ReactGA.set({ page: location.pathname });
+    ReactGA.pageview(location.pathname);
+});
+
+ReactDOM.render(
+    <App history={history}/>,
+    document.getElementById('root')
+);
+
 registerServiceWorker();

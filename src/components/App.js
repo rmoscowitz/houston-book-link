@@ -1,26 +1,21 @@
 import './App.css';
 
 import React from 'react';
+import { HashRouter, Link, Route } from 'react-router-dom';
 import {
-    BrowserRouter as Router,
-    Route,
-} from 'react-router-dom';
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+} from 'reactstrap';
 
 import About from './About';
 import Home from './Home';
 import Resources from './Resources';
-
-import overdrive from './overdrive.png';
-
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-} from 'reactstrap';
+import overdrive from '../images/overdrive.png';
 
 class App extends React.Component {
     constructor(props) {
@@ -30,28 +25,31 @@ class App extends React.Component {
         this.state = {
           isOpen: false
         };
-      }
-      toggle() {
+    }
+
+    toggle() {
         this.setState({
-          isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen
         });
-      }
+    }
 
     render() {
         return (
-            <Router>
+            <HashRouter history={this.props.history}>
                 <div className="App">
                     {/* Top Bar */}
                     <Navbar inverse toggleable>
                       <NavbarToggler right onClick={this.toggle} />
-                      <NavbarBrand href="/"><h2>Houston Book Link</h2></NavbarBrand>
+                      <NavbarBrand tag={Link} to="/">
+                          <h3>Houston Book Link</h3>
+                      </NavbarBrand>
                       <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                           <NavItem>
-                            <NavLink href="/about">About</NavLink>
+                            <NavLink tag={Link} to="/about">About</NavLink>
                           </NavItem>
                           <NavItem>
-                            <NavLink href="/resources">Resources</NavLink>
+                            <NavLink tag={Link} to="/resources">Resources</NavLink>
                           </NavItem>
                         </Nav>
                       </Collapse>
@@ -75,12 +73,10 @@ class App extends React.Component {
                         </div>
                     </footer>
                 </div>
-            </Router>
+            </HashRouter>
 
         )
     }
 }
 
 export default App
-
-
