@@ -66,7 +66,7 @@ class App extends React.Component {
           <footer className="footer">
             <div className="footer-contact-us">
               Questions? Comments?&nbsp;
-              <a href="mailto:feedback@houstonbook.link?Subject=Website%20Feedback" target="_top">
+              <a href="mailto:feedback@houstonbook.link" target="_top">
                 Email us
               </a>!
             </div>
