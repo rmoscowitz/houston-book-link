@@ -66,6 +66,9 @@ class App extends React.Component {
 
                     {/* Footer */}
                     <footer className="footer">
+                        <div className="footer-contact-us">
+                            Questions? Comments? <a href="mailto:houstonbooklink@gmail.com?Subject=Website%20Feedback" target="_top">Email us</a>!
+                        </div>
                         <div className="footer-overdrive">
                             <img src={overdrive}
                                  alt="Powered by Overdrive Logo"/>

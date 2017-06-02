@@ -96,10 +96,15 @@ class About extends React.Component {
             </div>
             <div className="row row-media">
                 <div className="col-sm-12">
-                    <h2>Houston Book Link!</h2>
+                    <h2>Contact Us</h2>
                 </div>
-				<div className="col-xs-12 col-sm-2 col-sm-offset-5">
-					<img className="media-object train" src={logo} alt="Houston Book Link logo" width="48"/>
+				<div className="col-sm-12">
+					<img className="media-object train" src={logo} alt="Houston Book Link logo"/>
+				</div>
+				<div className="col-sm-12 contact-us">
+					<p>Have questions, comments or ideas for how to improve Houston Book Link? </p>
+					<p>We'd love to hear from you!</p>
+					<p>Email us at <a href="mailto:houstonbooklink@gmail.com?Subject=Website%20Feedback" target="_top">houstonbooklink@gmail.com</a> or find us on <a href="https://github.com/rmoscowitz/houston-elibrary-portal">Github</a>.</p>
 				</div>
             </div>
 	    </div>	

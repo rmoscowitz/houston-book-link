@@ -68,10 +68,6 @@
   background-color: white;
 }
 
-.train {
-  min-width: 128px;
-}
-
 .footer {
   position: fixed;
   bottom: 0;
@@ -86,14 +82,24 @@
   margin-right: 10px;
 }
 
+.footer-contact-us {
+  color: gray;
+  float: left;
+  font-size: 12px;
+  max-width: 50%;
+  padding-top: 5px;
+  text-align: left;
+}
+
 /*About*/
 .about-container .row {
   padding: 60px;
+  vertical-align: middle;
 }
 
 .about-container img {
+  display: block;
   margin: auto;
-  width: 90%;
   max-width: 256px;
 }
 
@@ -107,8 +113,22 @@
 }
 
 .about-container a {
-  color: #4c3e7b; 
+  color: #4c3e7b;
 }
+
+.about-container .train {
+  width: 48px;
+  min-width: 128px;
+}
+
+.about-container .contact-us {
+  padding-top: 20px;
+}
+
+.about-container .contact-us a {
+  color: #0275d8; /* override style above */
+}
+
 /* Home */
 .card-container {
   display: inline-flex; /* err.... */
