@@ -11,7 +11,7 @@ class Home extends React.Component {
         super(props)
 
         this.state = {
-            libraries: []
+            libraries: [],
         }
 
         this.select = this.select.bind(this)
