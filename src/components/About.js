@@ -91,11 +91,14 @@ class About extends React.Component {
             <img className="media-object train" src={logo} alt="Houston Book Link logo"/>
           </div>
           <div className="col-sm-12 contact-us">
-            <p>Have questions, comments or ideas for how to improve Houston Book Link? </p>
+            <p>Have questions, comments or ideas for how to improve Houston Book Link?</p>
             <p>We'd love to hear from you!</p>
-            <p>Email us at <a href="mailto:houstonbooklink@gmail.com?Subject=Website%20Feedback"
-                              target="_top">houstonbooklink@gmail.com</a> or find us on
-              <a href="https://github.com/rmoscowitz/houston-elibrary-portal">Github</a>.</p>
+            <p>Email us at&nbsp;
+              <a href="mailto:feedback@houstonbook.link?Subject=Website%20Feedback"
+                 target="_top">feedback@houstonbook.link</a>
+              &nbsp;or find us on&nbsp;
+              <a href="https://github.com/rmoscowitz/houston-elibrary-portal">Github</a>.
+            </p>
           </div>
         </div>
       </div>
