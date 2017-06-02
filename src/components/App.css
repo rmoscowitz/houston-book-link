@@ -83,7 +83,7 @@
 .about-container img {
   display: block;
   margin: auto;
-  max-width: 256px;
+  max-width: 100%;
 }
 
 .about-container h2 {

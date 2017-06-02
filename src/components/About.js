@@ -32,8 +32,8 @@ class About extends React.Component {
 			    	<p>There are two public library systems in Houston; the Houston Public Library and Harris
 			    	County Public Library. To search for digital books, people are currently forced to perform
 			    	two separate searches, one at each of the library's sites. Our goal is to provide a platform
-			    	that allows users to search for and check out digital books from both libraries. We are also 
-			    	strictly adhering to web accessibility guidelines so that individuals with disabilities 
+			    	that allows users to search for and check out digital books from both libraries. We are also
+			    	strictly adhering to web accessibility guidelines so that individuals with disabilities
 			    	can use our service and access the ebooks more easily.
 			    	</p>
 			    </div>
@@ -46,7 +46,7 @@ class About extends React.Component {
 		    	<div className="col-sm-12">
 		    		<h2>Team</h2>
 		    	</div>
-		    	<div className="col-xs-12 col-sm-2 col-sm-offset-1">
+		    	<div className="col-xs-12 offset-sm-1 col-sm-2">
 		    		<img className="media-object" src={cameron} width="128" alt="cameron" />
 		    		<a href="https://github.com/emptyflash">Cameron</a>
 		    	</div>
@@ -72,7 +72,7 @@ class About extends React.Component {
                 <div className="col-sm-12">
                     <h2>Special Thanks</h2>
                 </div>
-				<div className="col-xs- 12 col-sm-2 col-sm-offset-4">
+				<div className="col-xs-12 offset-sm-4 col-sm-2">
 					<img className="media-object" src={eric} width="128" alt="eric" />
 					<a href="https://github.com/mamoot">Eric</a>
 				</div>
