@@ -12,7 +12,7 @@ const util = require('../util.js');
  });
  */
 
-export const OauthActor = (tokenUrl, clientSecret, clientId) => {
+export default function(tokenUrl, clientSecret, clientId) {
   var token;
 
   return {
@@ -31,12 +31,15 @@ export const OauthActor = (tokenUrl, clientSecret, clientId) => {
     _get: function () {
       const ctx = this;
       const self = this.self.pick('?_get');
-      const payload = {
+      const form = {
         client_id: clientId,
         client_secret: clientSecret,
         grant_type: 'client_credentials'
       };
-      request.post(tokenUrl, { form: payload }, function (err, resp, bodyString) {
+      const headers = {
+        'User-Agent': clientId
+      };
+      request.post(tokenUrl, { headers, form }, function (err, resp, bodyString) {
         if (err) return console.error('Failed to get oauth', err);
         if (resp && resp.statusCode === 200 && bodyString) {
           const body = JSON.parse(bodyString);

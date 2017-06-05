@@ -21,7 +21,7 @@ function upsertItems(tableName, conflictTarget, itemData, returns) {
  * @param {object} libraries a map from overdrive library id to our id
  * @param {object} formats a map from overdrive format id to our id
  */
-export const DbActor = function(libraries, formats) {
+export default function(libraries, formats) {
   return {
     processAndStore: function(response) {
       const ctx = this;
@@ -42,16 +42,19 @@ export const DbActor = function(libraries, formats) {
             img_cover: _.get(product, ['images', 'cover', 'href']),
             img_cover_150_wide: _.get(product, ['images', 'cover150Wide', 'href']),
             img_cover_300_wide: _.get(product, ['images', 'cover300Wide', 'href']),
+            last_updated: new Date()
           };
           const libraryBook = {
             library_id: libraries[libraryId],
             date_added: product.dateAdded,
             star_rating: product.starRating,
             overdrive_href: product.contentDetails[0].href,
+            last_updated: new Date()
           };
           const bookFormats = product.formats.map(format => {
             return {
               format_id: formats[format.id],
+              last_updated: new Date()
             }
           });
           return { book, libraryBook, bookFormats };
@@ -76,7 +79,6 @@ export const DbActor = function(libraries, formats) {
             libraryBook.book_id = bookId;
             return libraryBook;
           });
-          console.log(libraryBooks);
           return upsertItems('library_books', 'book_id, library_id', libraryBooks, 'library_id')
             .then(_ => bookIds);
         })
@@ -87,7 +89,6 @@ export const DbActor = function(libraries, formats) {
               format.book_id = bookId;
               return format;
             });
-            console.log(bookFormats);
             return bookFormats;
           }));
           return upsertItems('book_formats', 'book_id, format_id', bookFormats, 'format_id')
