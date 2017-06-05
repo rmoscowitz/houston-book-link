@@ -1,4 +1,4 @@
-# Houston Book Link
+# Houston Book Link [![Build Status](https://travis-ci.org/rmoscowitz/houston-elibrary-portal.svg?branch=master)](https://travis-ci.org/rmoscowitz/houston-elibrary-portal)
 See our [Houston Hackathon](https://houstonhackathon5.devpost.com/submissions) submission.
 
 ## Technology stack
@@ -10,7 +10,7 @@ See our [Houston Hackathon](https://houstonhackathon5.devpost.com/submissions) s
 ## To serve application
 * Checkout and navigate into the repo
 * Install node from https://nodejs.org/en/download/
-* run ```npm run start-prod``` in the base directory to start up Node express server and expose front-end
+* Run ```npm start``` in the base directory to start up Node express server and expose front-end
 
 ## Contributing
 * Please make changes in feature branches and submit a pull request to master.
