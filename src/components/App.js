@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import './App.css';
 
 import React from 'react';
@@ -77,7 +79,6 @@ class App extends React.Component {
           </footer>
         </div>
       </HashRouter>
-
     )
   }
 }

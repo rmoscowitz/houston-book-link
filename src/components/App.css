@@ -147,13 +147,14 @@
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 	opacity: 0;
 	-webkit-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-	transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1); /* not supported in IE9! */
 }
 
 @media (min-width: 700px) {
 	/* hover animation on non-mobile screens */
 	.card-container .card:hover {
 		-webkit-transform: scale(1.25, 1.25);
+		-ms-transform: scale(1.05, 1.05);
 		transform: scale(1.05, 1.05);
 	}
 
@@ -162,10 +163,24 @@
 	}
 }
 
-.card-container .card svg {
-	background-color: white;
+.card-container .card .icon {
+	height: 35px;
+	width: 35px;
+	border-radius: 35px;
 	position: absolute;
+	top: 3px;
+	background-color: white;
+	font-size: 35px;
+	line-height: 50%;
 	z-index: 1;
+}
+
+.card-container .card .icon.red {
+	color: red;
+}
+
+.card-container .card .icon.green {
+	color: green;
 }
 
 .card-container .card img {
@@ -177,10 +192,6 @@
 .card-container .gray {
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
-}
-
-.card-container .card svg {
-	border-radius: 45px;
 }
 
 /* Search */

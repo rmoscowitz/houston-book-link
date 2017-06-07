@@ -1,6 +1,5 @@
 // import PropTypes from 'react'
 import React from 'react'
-import Ionicon from 'react-ionicons'
 
 class Card extends React.Component {
   constructor(props) {
@@ -20,11 +19,16 @@ class Card extends React.Component {
   }
 
   render() {
+    let icon = null;
+    if (this.state.selected) {
+      icon = <i className="icon ion-checkmark-circled green"></i>;
+    } else {
+      icon = <i className="icon ion-close-circled red"></i>;
+    }
+
     return (
       <div className="card" onClick={this._onCardClick}>
-        <Ionicon icon={this.state.selected ? "ion-checkmark-circled" : "ion-close-circled"}
-                 fontSize="35px"
-                 color={this.state.selected ? "green" : "red"}/>
+        {icon}
         <img className={"card-image " + (this.state.selected ? "" : "gray")}
              src={this.props.imagePath}
              alt={this.props.imageAltText}/>
@@ -41,4 +45,4 @@ class Card extends React.Component {
 //     select: PropTypes.func,
 // };
 
-export default Card;
+export default Card
