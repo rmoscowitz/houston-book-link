@@ -1,4 +1,4 @@
-# Houston Book Link [![Build Status](https://travis-ci.org/rmoscowitz/houston-elibrary-portal.svg?branch=master)](https://travis-ci.org/rmoscowitz/houston-elibrary-portal)
+# Houston Book Link [![Build Status](https://travis-ci.org/rmoscowitz/houston-book-link.svg?branch=master)](https://travis-ci.org/rmoscowitz/houston-book-link)
 See our [Houston Hackathon](https://houstonhackathon5.devpost.com/submissions) submission.
 
 ## Technology stack
