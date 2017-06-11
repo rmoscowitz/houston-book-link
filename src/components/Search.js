@@ -61,16 +61,14 @@ class Search extends React.Component {
     if (hasDuplicates(allLibs)) {
       return (
         <div className="result row">
-          <div className="col-2">
+          <div className="col-2 img-col">
             <img src={suggestion.img_thumbnail || defaultBookCover}
                  alt={suggestion.title}/>
           </div>
           <div className="result-details col-5">
-            <span className="title">{suggestion.title}</span>
-            <br/>
-            <span>by&nbsp;</span>{suggestion.primary_creator_name}
-            <br/>
-            {suggestion.media_type}
+            <div className="title">{suggestion.title}</div>
+            <div>by&nbsp;{suggestion.primary_creator_name}</div>
+            <div>{suggestion.media_type}</div>
           </div>
           <div className="checkout-info col-4">
             { checkout(suggestion.locations) }

@@ -132,6 +132,9 @@
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	-webkit-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-moz-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-ms-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-o-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 	transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -147,13 +150,19 @@
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 	opacity: 0;
 	-webkit-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-moz-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-ms-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-o-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 	transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 @media (min-width: 700px) {
 	/* hover animation on non-mobile screens */
 	.card-container .card:hover {
-		-webkit-transform: scale(1.25, 1.25);
+		-webkit-transform: scale(1.05, 1.05);
+		-moz-transform: scale(1.05, 1.05);
+		-ms-transform: scale(1.05, 1.05);
+		-o-transform: scale(1.05, 1.05);
 		transform: scale(1.05, 1.05);
 	}
 
@@ -162,10 +171,24 @@
 	}
 }
 
-.card-container .card svg {
-	background-color: white;
+.card-container .card .icon {
+	height: 35px;
+	width: 35px;
+	border-radius: 35px;
 	position: absolute;
+	top: 3px;
+	background-color: white;
+	font-size: 35px;
+	line-height: 50%;
 	z-index: 1;
+}
+
+.card-container .card .icon.red {
+	color: red;
+}
+
+.card-container .card .icon.green {
+	color: green;
 }
 
 .card-container .card img {
@@ -177,10 +200,6 @@
 .card-container .gray {
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
-}
-
-.card-container .card svg {
-	border-radius: 45px;
 }
 
 /* Search */
@@ -217,30 +236,18 @@
 	border: 1px solid darkgray;
 	border-top: none;
 	padding: 5px;
-	height: 100px;
-}
-
-.search-container li .result {
-	margin: 0;
-	border: 1px solid darkgray;
-	border-top: none;
-	padding: 5px;
-	height: 100px;
-}
-
-.search-container li .result {
-	margin: 0;
-	border: 1px solid darkgray;
-	border-top: none;
-	padding: 5px;
 	height: 100px; /* safari */
 }
 
-.search-container li .result div {
+.search-container li .result > div {
+	float: left; /* ie9 */
+}
+
+.search-container li .result .img-col {
 	height: 100%; /* safari */
 }
 
-.search-container li .result img {
+.search-container li .result .img-col img {
 	padding: 5px;
 	height: 100%;
 }
