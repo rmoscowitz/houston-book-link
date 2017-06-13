@@ -16,14 +16,27 @@ function upsertItems(tableName, conflictTarget, itemData, returns) {
     .then(result => result.rows);
 };
 
+
 /**
- * Actor for shoving overdrive data into the db.
+ * Deletes all books last_updated before a given timestamp, indicating
+ * that it was not updated or created in the current extractor run
+ * @param {timestamp} timestamp a unix timestamp in seconds
+ * @returns {promise<int>} number of rows deleted
+ */
+export function deleteUpdatedBefore(timestamp) {
+  return knex('books')
+      .whereRaw('last_updated < TO_TIMESTAMP(?)', [timestamp])
+      .del();
+}
+
+/**
+ * Function for shoving overdrive data into the db.
  * @param {object} libraries a map from overdrive library id to our id
  * @param {object} formats a map from overdrive format id to our id
  * @param {object} response the response from the overdrive api
- * @returns {promise<int>} the ids updated/created
+ * @returns {promise<object>} the ids updated/created
  */
-export default function processAndStore(libraries, formats, response) {
+export function processAndStore(libraries, formats, response) {
   const libraryId = response.id;
   // Turn all responses to our models for upsert
   const allModels = response.products

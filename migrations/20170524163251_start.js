@@ -26,7 +26,9 @@ exports.up = function(knex, Promise) {
       table.string('collection_token');
     })
     .createTable('library_books', function(table) {
-      table.integer('book_id').references('id').inTable('books');
+      table.integer('book_id')
+        .references('id').inTable('books')
+        .onDelete('cascade');
       table.integer('library_id').references('id').inTable('libraries');
       table.primary(['book_id', 'library_id']);
 
@@ -41,7 +43,9 @@ exports.up = function(knex, Promise) {
       table.string('label');
     })
     .createTable('book_formats', function(table) {
-      table.integer('book_id').references('id').inTable('books');
+      table.integer('book_id')
+        .references('id').inTable('books')
+        .onDelete('cascade');
       table.integer('format_id').references('id').inTable('formats');
       table.primary(['book_id', 'format_id']);
     });

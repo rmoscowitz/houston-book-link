@@ -2,25 +2,11 @@ import os from 'os'
 import Promise from 'bluebird';
 import _ from 'lodash';
 
-import getOAuthToken from './oauthActor.js';
-import doRequest from './requestActor.js';
-import processAndStore from './dbActor.js';
-import { Library, Format } from '../models.js';
 import { envOrElse } from '../util.js';
+import { getOAuthToken, doRequest } from './overdriveRequests.js';
+import { processAndStore, deleteUpdatedBefore } from './dbFunctions.js';
+import { Library, Format } from '../models.js';
 
-
-const oauthUrl = 'https://oauth.overdrive.com/token';
-const clientSecret = envOrElse('OVERDRIVE_CLIENT_SECRET', () => {
-  throw new Error('Must provide a OVERDRIVE_CLIENT_SECRET environment variable');
-});
-const clientId = envOrElse('OVERDRIVE_CLIENT_ID', () => {
-  throw new Error('Must provie a OVERDRIVE_CLIENT_ID environment variable');
-});
-const LIMIT = 300;
-const oauthTokenPromise = getOAuthToken(oauthUrl, clientId, clientSecret)
-  .then(token => token.access_token);
-
-oauthTokenPromise.then(_=> console.log('Received access token from overdrive'));
 
 function createLibrariesMap(libraries) {
   const libraryPairs = libraries.map(library => 
@@ -28,14 +14,11 @@ function createLibrariesMap(libraries) {
   );
   return _.fromPairs(libraryPairs);
 }
-const librariesPromise = Library.fetchAll();
-const librariesMap = librariesPromise.then(createLibrariesMap);
 
 function createFormatsMap(formats) {
   const formatPairs = formats.map(format => [format.attributes.key, format.id]);
   return _.fromPairs(formatPairs);
 }
-const formatsMap = Format.fetchAll().then(createFormatsMap);
 
 function initialReqForLibrary(library) {
   const collection = library.attributes.collection_token;
@@ -47,7 +30,7 @@ function initialReqForLibraries(libraries) {
   return Promise.all(reqPromises);
 }
 
-function collectionOffsets(response) {
+function responseToOffsets(response) {
   const total = response.totalItems;
   const collection = response.id;
   const offsets = _.range(0, total, LIMIT);
@@ -55,14 +38,10 @@ function collectionOffsets(response) {
   return offsets.map(offset => [collection, offset]);
 }
 
-function collectionsOffsets(responses) {
-  const collectionAndOffset = responses.map(collectionOffsets);
-  return _.flatten(collectionAndOffset);
+function collectionsAndOffsets(responses) {
+  const offsets = responses.map(responseToOffsets);
+  return _.flatten(offsets);
 }
-
-const collectionsOffsetsPromise = librariesPromise
-  .then(initialReqForLibraries)
-  .then(collectionsOffsets);
 
 function doWork(oauthToken, collection, limit, offset) {
   console.log(`About to send request for books ${offset}-${offset+LIMIT} of collection ${collection}`);
@@ -70,9 +49,37 @@ function doWork(oauthToken, collection, limit, offset) {
   const reqPromise = doRequest(oauthToken, collection, limit, offset)
   const resultPromise = Promise.all([librariesMap, formatsMap, reqPromise])
     .then(([libraries, formats, resp]) => processAndStore(libraries, formats, resp))
-  resultPromise.then(bookIds => console.log(`Saved ${Object.keys(bookIds).length} books to db for ${collection} in ${(Date.now() - workTime) / 1000} s`));
+  resultPromise.then(bookIds => {
+    console.log(`Saved ${Object.keys(bookIds).length} books to db for ${collection} in ${elapsedTime(workTime)} s`)
+  });
   return resultPromise;
 }
+
+function elapsedTime(startTime) {
+    return (Date.now() - startTime) / 1000;
+}
+
+
+const oauthUrl = 'https://oauth.overdrive.com/token';
+const clientSecret = envOrElse('OVERDRIVE_CLIENT_SECRET', () => {
+  throw new Error('Must provide a OVERDRIVE_CLIENT_SECRET environment variable');
+});
+const clientId = envOrElse('OVERDRIVE_CLIENT_ID', () => {
+  throw new Error('Must provie a OVERDRIVE_CLIENT_ID environment variable');
+});
+const LIMIT = 300;
+
+const oauthTokenPromise = getOAuthToken(oauthUrl, clientId, clientSecret)
+  .then(token => token.access_token);
+oauthTokenPromise.then(_=> console.log('Received access token from overdrive'));
+
+const librariesPromise = Library.fetchAll();
+const librariesMap = librariesPromise.then(createLibrariesMap);
+const formatsMap = Format.fetchAll().then(createFormatsMap);
+
+const collectionsOffsetsPromise = librariesPromise
+  .then(initialReqForLibraries)
+  .then(collectionsAndOffsets);
 
 const startTime = Date.now();
 Promise
@@ -91,4 +98,11 @@ Promise
     }, new Promise((resolve, _) => resolve()));
     return chunkedWorkPromise;
   })
-  .then(_ => console.log(`Finished in ${(Date.now() - startTime) / 1000} s`));
+  .then(_ => deleteUpdatedBefore(Math.floor(startTime / 1000)))
+  .then(count => console.log(`Deleted ${count} books that weren't updated`))
+  .then(_ => console.log(`Finished in ${elapsedTime(startTime)} s`))
+  .then(_ => process.exit())
+  .catch(error => {
+      console.error(error);
+      process.exit(1);
+  });
