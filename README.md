@@ -1,4 +1,4 @@
-# Houston Book Link [![Build Status](https://travis-ci.org/rmoscowitz/houston-elibrary-portal.svg?branch=master)](https://travis-ci.org/rmoscowitz/houston-elibrary-portal)
+# Houston Book Link [![Build Status](https://travis-ci.org/rmoscowitz/houston-book-link.svg?branch=master)](https://travis-ci.org/rmoscowitz/houston-book-link)
 See our [Houston Hackathon](https://houstonhackathon5.devpost.com/submissions) submission.
 
 ## Technology stack
@@ -10,10 +10,11 @@ See our [Houston Hackathon](https://houstonhackathon5.devpost.com/submissions) s
 ## To serve application
 * Checkout and navigate into the repo
 * Install node from https://nodejs.org/en/download/
-* Run ```npm start``` in the base directory to start up Node express server and expose front-end
+* Run ```npm install``` to get dependencies
+* Run ```npm start``` to start up Node express server and serve front-end
 
 ## Contributing
 * Please make changes in feature branches and submit a pull request to master.
-* New collaborators welcome!
+* New contributors welcome!
 
-![Houston Book Link logo](https://raw.githubusercontent.com/rmoscowitz/houston-elibrary-portal/master/src/logo3.png)
+![Houston Book Link logo](https://raw.githubusercontent.com/rmoscowitz/houston-book-link/master/src/images/logo3.png)

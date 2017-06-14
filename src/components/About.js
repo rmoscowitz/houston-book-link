@@ -97,7 +97,7 @@ class About extends React.Component {
               <a href="mailto:feedback@houstonbook.link"
                  target="_top">feedback@houstonbook.link</a>
               &nbsp;or find us on&nbsp;
-              <a href="https://github.com/rmoscowitz/houston-elibrary-portal">Github</a>.
+              <a href="https://github.com/rmoscowitz/houston-book-link">Github</a>.
             </p>
           </div>
         </div>
