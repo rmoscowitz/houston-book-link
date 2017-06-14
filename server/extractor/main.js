@@ -4,7 +4,11 @@ import _ from 'lodash';
 
 import { envOrElse } from '../util.js';
 import { getOAuthToken, doRequest } from './overdriveRequests.js';
-import { processAndStore, deleteUpdatedBefore } from './dbFunctions.js';
+import { 
+  processAndStore, 
+  deleteUpdatedBefore, 
+  updateTextSearchVector 
+} from './dbFunctions.js';
 import { Library, Format } from '../models.js';
 
 
@@ -100,6 +104,7 @@ Promise
   })
   .then(_ => deleteUpdatedBefore(Math.floor(startTime / 1000)))
   .then(count => console.log(`Deleted ${count} books that weren't updated`))
+  .then(_ => updateTextSearchVector())
   .then(_ => console.log(`Finished in ${elapsedTime(startTime)} s`))
   .then(_ => process.exit())
   .catch(error => {

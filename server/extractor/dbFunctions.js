@@ -16,6 +16,22 @@ function upsertItems(tableName, conflictTarget, itemData, returns) {
     .then(result => result.rows);
 };
 
+function to_tsvector(column) {
+  return `to_tsvector(coalesce(${column}, ''))`;
+}
+
+export function updateTextSearchVector() {
+  const searchables = [
+    'title', 
+    'series',
+    'subtitle',
+    'primary_creator_name',
+    'media_type'
+  ]
+  const value = searchables.map(to_tsvector).join(' || ');
+  return knex
+    .raw(`update books set tsv = ${value}`);
+}
 
 /**
  * Deletes all books last_updated before a given timestamp, indicating
