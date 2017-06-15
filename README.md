@@ -10,7 +10,10 @@ See our [Houston Hackathon](https://houstonhackathon5.devpost.com/submissions) s
 ## To serve application
 * Checkout and navigate into the repo
 * Install node from https://nodejs.org/en/download/
+* Get a Postgres instance up and running
 * Run ```npm install``` to get dependencies
+* Run ```npm run migrate && npm run run-seeds``` to set up your database schema
+* Run ```npm run extractor``` to populate your database with books from Overdrive
 * Run ```npm start``` to start up Node express server and serve front-end
 
 ## Contributing
