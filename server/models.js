@@ -1,15 +1,10 @@
 const os = require('os');
+const util = require('./util.js');
 
-function envOrElse(name, defaultValue) {
-  return process.env[name] !== undefined 
-      ? process.env[name]
-      : defaultValue
-}
-
-const user = envOrElse('PG_USER', os.userInfo().username)
-const password = envOrElse('PG_PASSWORD', '')
-const dbname = envOrElse('PG_DBNAME', 'postgres')
-const host = envOrElse('PG_HOST', 'localhost')
+const user = util.envOrElse('PG_USER', os.userInfo().username)
+const password = util.envOrElse('PG_PASSWORD', '')
+const dbname = util.envOrElse('PG_DBNAME', 'postgres')
+const host = util.envOrElse('PG_HOST', 'localhost')
 
 
 const knex = require('knex')({
@@ -57,5 +52,9 @@ const Format = bookshelf.Model.extend({
 export {
   Book,
   Library,
-  bookshelf
+  Format,
+  LibraryBook,
+  BookFormat,
+  bookshelf,
+  knex
 }

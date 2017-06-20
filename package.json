@@ -9,14 +9,17 @@
     "bootstrap": "^4.0.0-alpha.6",
     "knex": "^0.13.0",
     "lodash": "^4.17.4",
-    "pg": "^6.2.2",
+    "pg": "^6.2.3",
     "react": "^15.5.4",
     "react-autosuggest": "^9.0.1",
     "react-dom": "^15.5.4",
-    "react-ga": "^2.2.0",
+    "react-foundation": "^0.7.0",
+    "react-ionicons": "^1.5.7",
     "react-router-dom": "^4.1.1",
+    "reactstrap": "^4.6.2",
+    "react-ga": "^2.2.0",
     "react-transition-group": "^1.1.3",
-    "reactstrap": "^4.6.2"
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.2",
@@ -34,7 +37,12 @@
     "build-backend": "mkdir -p build/server && babel server -d build/server",
     "prod": "NODE_ENV='PRODUCTION' node build/server/index.js",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "make-migration": "knex migrate:make",
+    "run-seeds": "knex seed:run",
+    "extractor": "babel-node server/extractor/main.js"
   },
   "proxy": "http://localhost:4000"
 }
