@@ -2,7 +2,7 @@
 See our [Houston Hackathon](https://houstonhackathon5.devpost.com/submissions) submission.
 
 ## Technology stack
-* Python script to scrape Overdrive APIs for library entities (/extractor)
+* Node script to scrape Overdrive APIs for library entities (/server/extractor)
 * Postgres to store scraped library entries from Overdrive
 * Node express server to expose endpoints for use by front-end
 * [CreateReactApp](https://github.com/facebookincubator/create-react-app) for React front-end, with Bootstrap & ionicons
