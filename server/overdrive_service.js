@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-const request = Promise.promisifyAll(require("request"), {multiArgs: true});
+import request from 'request-promise';
 
 
 // TODO stole following 2 functions from camerons branch, make DRY
@@ -32,9 +32,9 @@ const getOAuthToken = () => {
   const headers = {
     'User-Agent': clientId
   };
-  return request.postAsync(oauthUrl, { headers, form })
-    .spread((response, body) => {
-      return JSON.parse(body).access_token;
+  return request.post(oauthUrl, { headers, form })
+    .then((response) => {
+      return JSON.parse(response).access_token;
     });
 };
 
@@ -86,9 +86,10 @@ export const addAvailability = (data) => {
       const headers = {
         "Authorization": `Bearer ${token}`
       }
-      Promise.map(urls, ({library, url}) => {
-        return request.getAsync(url, { headers }).spread((response, body) => {
-          return [JSON.parse(body), library];
+      return Promise.map(urls, ({library, url}) => {
+        return request.get(url, { headers })
+          .then((response) => {
+            return [JSON.parse(response), library];
         });
       }).then(function(results) {
         return mergeAvailabilityIntoResponse(results, data);
