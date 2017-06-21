@@ -1,5 +1,5 @@
 import { search, libraries } from './pg_service';
-import { addAvailability } from './overdrive_service';
+import { addAvailability } from './availability';
 
 var express = require('express');
 var path = require('path');
