@@ -1,42 +1,8 @@
 import Promise from 'bluebird';
 import request from 'request-promise';
 
-
-// TODO stole following 2 functions from camerons branch, make DRY
-const envOrElse = (name, defaultValue) => {
-  if (typeof defaultValue == 'function') {
-    return process.env[name] !== undefined
-      ? process.env[name]
-      : defaultValue()
-  } else {
-    return process.env[name] !== undefined
-      ? process.env[name]
-      : defaultValue
-  }
-}
-
-
-const getOAuthToken = () => {
-  const oauthUrl = 'https://oauth.overdrive.com/token';
-  const clientSecret = envOrElse('OVERDRIVE_CLIENT_SECRET', () => {
-    throw new Error('Must provide a OVERDRIVE_CLIENT_SECRET environment variable');
-  });
-  const clientId = envOrElse('OVERDRIVE_CLIENT_ID', () => {
-    throw new Error('Must provie a OVERDRIVE_CLIENT_ID environment variable');
-  });
-  const form = {
-    client_id: clientId,
-    client_secret: clientSecret,
-    grant_type: 'client_credentials'
-  };
-  const headers = {
-    'User-Agent': clientId
-  };
-  return request.post(oauthUrl, { headers, form })
-    .then((response) => {
-      return JSON.parse(response).access_token;
-    });
-};
+import { envOrElse } from './util';
+import { getToken } from './overdrive_service';
 
 
 const groupByLibrary = (data) => {
@@ -81,7 +47,7 @@ export const addAvailability = (data) => {
     library: libToken,
     url: `https://api.overdrive.com/v1/collections/${libToken}/availability?products=${libBooks[libToken].join(',')}`
   }));
-  return getOAuthToken()
+  return getToken()
     .then(token => {
       const headers = {
         "Authorization": `Bearer ${token}`
