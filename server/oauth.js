@@ -3,7 +3,7 @@ import oAuth2 from 'simple-oauth2';
 import Promise from 'bluebird';
 
 
-const creds = oAuth2.create({
+const CREDS = oAuth2.create({
   client: {
     id: envOrElse('OVERDRIVE_CLIENT_ID', () => {
       throw new Error('Must provie a OVERDRIVE_CLIENT_ID environment variable');
@@ -13,35 +13,39 @@ const creds = oAuth2.create({
     })
   },
   auth: {
-    tokenHost: 'https://oauth.overdrive.com/token'
+    tokenHost: 'https://oauth.overdrive.com',
+    tokenPath: '/token',
+  },
+  options: {
+    useBodyAuth: false,
+    useBasicAuthorizationHeader: true,
+    bodyFormat: 'form'
   }
 });
 
+let TOKEN = null;
 const initToken = () => {
-  return creds.clientCredentials
-    .getToken(tokenConfig)
+  return CREDS.clientCredentials
+    .getToken({})
     .then((result) => {
-      return creds.accessToken.create(result);
+      TOKEN = CREDS.accessToken.create(result);
+      return TOKEN.token.access_token;
     })
     .catch((error) => {
       console.log('Access Token error', error.message);
     });
 }
 
-const TOKEN = null;
-export default const getToken = () => {
-  // Check if the token is expired. If expired it is refreshed.
+export const getToken = () => {
+
   if (!TOKEN) {
     return initToken()
-  }
-
-  if (TOKEN.expired()) {
+  } else if (TOKEN.expired()) {
     return TOKEN.refresh()
-    .then((result) => {
-      TOKEN = result;
-      return TOKEN;
-    });
-  } else {
-    return Promise.return(TOKEN);
+      .then((result) => {
+        TOKEN = result;
+        return TOKEN.token.access_token;
+      });
   }
+  return Promise.resolve(TOKEN.token.access_token);
 }

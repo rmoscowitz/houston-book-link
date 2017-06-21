@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import request from 'request-promise';
 
 import { envOrElse } from './util';
-import { getToken } from './overdrive_service';
+import { getToken } from './oauth';
 
 
 const groupByLibrary = (data) => {
@@ -42,7 +42,6 @@ const mergeAvailabilityIntoResponse = (availability, data) => {
 
 export const addAvailability = (data) => {
   const libBooks = groupByLibrary(data);
-  // make request
   const urls = Object.keys(libBooks).map(libToken => ({
     library: libToken,
     url: `https://api.overdrive.com/v1/collections/${libToken}/availability?products=${libBooks[libToken].join(',')}`
