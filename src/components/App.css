@@ -66,12 +66,17 @@
 }
 
 .footer-contact-us {
-	color: gray;
+	color: #5d5d5d;
 	float: left;
 	font-size: 12px;
 	max-width: 60%;
 	padding-top: 5px;
 	text-align: left;
+}
+
+.footer-contact-us a {
+	color: #007099;
+	text-decoration: underline;
 }
 
 /*About*/
