@@ -1,8 +1,8 @@
 import { search, libraries } from './pg_service';
+import { addAvailability } from './availability';
 
 var express = require('express');
 var path = require('path');
-
 var app = express();
 
 
@@ -18,9 +18,16 @@ app.get('/search', function(req, res) {
     limit: req.query.limit || 20,
     offset: req.query.offset || 0
   }
-  search(params).then(data => {
-    res.send(data)
-  });
+  search(params)
+    .then(data => {
+      return addAvailability(data);
+    })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.error(err);
+    })
 });
 
 app.use(express.static('build'));
