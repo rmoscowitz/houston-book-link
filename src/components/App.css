@@ -236,8 +236,7 @@
 	padding-left: 0;
 	list-style-type: none;
 	text-align: left;
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden;
 	max-width: 800px;
 	margin: auto;
 	width: 90%;
@@ -274,6 +273,34 @@
 
 .search-container li .result .checkout-info {
 	padding: 5px;
+}
+
+.search-container li .result .checkout-info .row {
+	height: 100%;
+}
+
+.search-container li .result .checkout-info .col-6 {
+	font-size: 12px;
+	height: 100%;
+	padding-top: 10px;
+	text-align: center;
+}
+
+.search-container li .result .checkout-info .col-6 .checkout-details {
+	cursor: pointer;
+	height: 100%;
+}
+
+.search-container li .result .checkout-info .col-6 .checkout-details img {
+	height: 70%;
+}
+
+.search-container li .result .checkout-info .col-6 .checkout-details div.bold {
+	font-weight: bold;
+}
+
+.search-container li .result .checkout-info .col-6 .checkout-details div.italic {
+	font-style: italic;
 }
 
 .search-container li .result .author {

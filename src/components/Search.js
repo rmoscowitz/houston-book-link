@@ -3,6 +3,8 @@ import DebounceInput from 'react-debounce-input'
 
 import loadingGIF from '../images/loading.gif'
 import defaultBookCover from '../images/DefaultBook.png'
+import harrisCard from '../images/harris-co-cards.png'
+import houstonCard from '../images/houston-card.png'
 
 class Search extends React.Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class Search extends React.Component {
       selectedLibraryIds: [],
     }
     this.renderSuggestion = this.renderSuggestion.bind(this)
+    this.goToOverdrive = this.goToOverdrive.bind(this)
   }
 
   // handles new props (selected library cards)
@@ -55,17 +58,53 @@ class Search extends React.Component {
     }
   }
 
-  renderCheckoutInfo(locations) {
-    return locations.map((location, index) => {
-      return (
-        <a key={index} href={location.overdrive_href}>Available at {location.library_name}<br /></a>
-      )
-    })
+  goToOverdrive(result) {
+    if (result) {
+      window.open(result.overdrive_href, '_blank');
+    }
+  }
+
+  renderCheckoutInfo(results) {
+    const houstonResult = results.find(result => result.library_id === 1);
+    const harrisResult = results.find(result => result.library_id === 2);
+
+    const showHouston = this.state.selectedLibraryIds.indexOf(1) !== -1;
+    const showHarris = this.state.selectedLibraryIds.indexOf(2) !== -1;
+
+    return (
+      <div className='row'>
+
+        {/* houston public */}
+        <div className={'col-6 ' + (!showHarris ? 'offset-sm-6' : '')}
+             onClick={ () => { this.goToOverdrive(houstonResult) } }>
+          { showHouston && houstonResult ?
+            <div className="checkout-details ">
+              <img src={houstonCard} alt={houstonResult.library_name}/>
+              <div className={ houstonResult.availability.available ? 'bold' : 'italic'}>
+                {houstonResult.availability.available ? 'Check Out' : 'Place Hold'}
+              </div>
+            </div>
+            : null }
+        </div>
+
+        {/* harris county */}
+        <div className='col-6'
+             onClick={ () => { this.goToOverdrive(harrisResult) } }>
+          { showHarris && harrisResult ?
+            <div className="checkout-details">
+              <img src={harrisCard} alt={harrisResult.library_name}/>
+              <div className={ harrisResult.availability.available ? 'bold' : 'italic'}>
+                {harrisResult.availability.available ? 'Check Out' : 'Place Hold'}
+              </div>
+            </div>
+            : null }
+        </div>
+
+      </ div >
+    )
   }
 
   renderSuggestion(suggestion, index) {
-    const checkout = locations => this.renderCheckoutInfo(locations);
-
     return (
       <li role="option" key={index} aria-selected="false">
         <div className="result row">
@@ -73,13 +112,13 @@ class Search extends React.Component {
             <img src={suggestion.img_thumbnail || defaultBookCover}
                  alt={suggestion.title}/>
           </div>
-          <div className="result-details col-5">
+          <div className="result-details col-6">
             <div className="title">{suggestion.title}</div>
             <div>by&nbsp;{suggestion.primary_creator_name}</div>
             <div>{suggestion.media_type}</div>
           </div>
           <div className="checkout-info col-4">
-            { checkout(suggestion.locations) }
+            { this.renderCheckoutInfo(suggestion.locations) }
           </div>
         </div>
       </li>
