@@ -236,8 +236,7 @@
 	padding-left: 0;
 	list-style-type: none;
 	text-align: left;
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden;
 	max-width: 800px;
 	margin: auto;
 	width: 90%;
@@ -256,7 +255,7 @@
 }
 
 .search-container li .result .img-col {
-	height: 100%; /* safari */
+	height: 100%; /* safari, firefox */
 }
 
 .search-container li .result .img-col img {
@@ -266,6 +265,7 @@
 
 .search-container li .result .result-details {
 	padding: 5px;
+	height: 100%; /* safari, firefox */
 }
 
 .search-container li .result .title {
@@ -274,6 +274,37 @@
 
 .search-container li .result .checkout-info {
 	padding: 5px;
+	height: 100%; /* safari, firefox */
+}
+
+.search-container li .result .checkout-info .row {
+	height: 100%;
+}
+
+.search-container li .result .checkout-info .col-6 {
+	font-size: 12px;
+	height: 100%;
+	padding-top: 10px;
+	text-align: center;
+	float: left; /* ie9 */
+}
+
+.search-container li .result .checkout-info .col-6 .checkout-details {
+	cursor: pointer;
+	height: 100%;
+}
+
+.search-container li .result .checkout-info .col-6 .checkout-details img {
+	height: 70%;
+	width: 70%; /* ie10 */
+}
+
+.search-container li .result .checkout-info .col-6 .checkout-details div.bold {
+	font-weight: bold;
+}
+
+.search-container li .result .checkout-info .col-6 .checkout-details div.italic {
+	font-style: italic;
 }
 
 .search-container li .result .author {
