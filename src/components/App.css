@@ -224,9 +224,16 @@
 	outline: none;
 }
 
+.search-container .no-results-message p {
+	padding-top: 10px;
+}
+
+.search-container .no-libraries-message p {
+	padding-top: 10px;
+}
+
 .search-container ul {
 	padding-left: 0;
-	margin-right: 5%;
 	list-style-type: none;
 	text-align: left;
 	overflow-x: hidden;
