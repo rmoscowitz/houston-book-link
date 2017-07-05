@@ -1,8 +1,7 @@
-import React from 'react';
-import Autosuggest from 'react-autosuggest';
-import {debounce as _debounce} from 'lodash';
+import React from 'react'
+import DebounceInput from 'react-debounce-input'
 
-import loadingGIF from '../images/loading.gif';
+import loadingGIF from '../images/loading.gif'
 import defaultBookCover from '../images/DefaultBook.png'
 
 class Search extends React.Component {
@@ -10,32 +9,50 @@ class Search extends React.Component {
     super(props);
 
     this.state = {
-      value: '',          // for autosuggest
-      suggestions: [],    // for autosuggest
+      value: '',
+      suggestions: [],
       loading: false,
-    };
-
-    this.getSuggestionValue = this.getSuggestionValue.bind(this)
+      selectedLibraryIds: [],
+    }
     this.renderSuggestion = this.renderSuggestion.bind(this)
-    this.renderCheckoutInfo = this.renderCheckoutInfo.bind(this)
-    this.debouncedLoadSuggestions = _debounce(this.loadSuggestions, 500);
+  }
+
+  // handles new props (selected library cards)
+  componentWillReceiveProps(nextProps) {
+    const newIds = nextProps.selectedLibraries
+      .filter(library => library.selected)
+      .map(library => library.id);
+
+    this.setState({
+      selectedLibraryIds: newIds,
+      loading: this.state.selectedLibraryIds.length !== newIds.length
+    }, this.loadSuggestions);
   }
 
   focus() {
-    this.autoSuggest.input.focus()
+    this.searchInput.focus()
   }
 
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
-  };
+  onChange = (event) => {
+    const value = event.target.value;
+    this.setState({value, loading: true});
+    this.loadSuggestions(value);
+  }
 
-  // When suggestion is clicked, Autosuggest needs to populate the input element
-  // based on the clicked suggestion. Teach Autosuggest how to calculate the
-  // input value for every given suggestion.
-  getSuggestionValue(suggestion) {
-    return suggestion.title;
+  loadSuggestions = (newValue) => {
+    const {value, selectedLibraryIds} = this.state;
+    const search = value || newValue;
+
+    if (selectedLibraryIds.length > 0 && search) {
+      fetch(`/search?search=${encodeURIComponent(search)}&libraries=${selectedLibraryIds.join(',')}`)
+        .then(response => {
+          response.json().then(suggestions => {
+            this.setState({suggestions, loading: false})
+          })
+        })
+    } else {
+      this.setState({ suggestions: [], loading: false})
+    }
   }
 
   renderCheckoutInfo(locations) {
@@ -43,23 +60,14 @@ class Search extends React.Component {
       return (
         <a key={index} href={location.overdrive_href}>Available at {location.library_name}<br /></a>
       )
-    });
+    })
   }
 
-  renderSuggestion(suggestion) {
+  renderSuggestion(suggestion, index) {
     const checkout = locations => this.renderCheckoutInfo(locations);
-    const selectedLibraries = this.props.selectedLibraries
-    .filter(library => library.selected)
-    .map(library => library.id)
 
-    const hasDuplicates = (array) => (new Set(array)).size !== array.length;
-    const allLibs = [
-      ...selectedLibraries,
-      ...suggestion.locations.map(location => location.library_id)
-    ];
-
-    if (hasDuplicates(allLibs)) {
-      return (
+    return (
+      <li role="option" key={index} aria-selected="false">
         <div className="result row">
           <div className="col-2 img-col">
             <img src={suggestion.img_thumbnail || defaultBookCover}
@@ -74,76 +82,55 @@ class Search extends React.Component {
             { checkout(suggestion.locations) }
           </div>
         </div>
-      );
-    }
+      </li>
+    )
   }
 
-  // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({ loading: true })
-    this.debouncedLoadSuggestions(value)
-  };
-
-  loadSuggestions = (value) => {
-    const selectedIds = this.props.selectedLibraries
-    .filter(library => library.selected)
-    .map(library => library.id);
-
-    fetch(`/search?search=${encodeURIComponent(value)}&libraries=${selectedIds.join(',')}`)
-    .then(response => {
-      response.json().then(data => {
-        if (data.length) {
-          this.setState({
-            suggestions: data,
-            loading: false,
-          });
-        } else {
-          this.setState({ loading: false })
-        }
-      })
-    });
+  renderSuggestions(suggestions) {
+    return suggestions.map((suggestion, index) => this.renderSuggestion(suggestion, index))
   }
-
-  // Autosuggest will call this function every time you need to clear suggestions.
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
-  };
 
   render() {
-    const { value, suggestions, loading } = this.state;
-
-    const inputProps = {
-      placeholder: 'Search for e-books and audiobooks...',
-      value,
-      onChange: this.onChange
-    };
+    const {value, suggestions, loading, selectedLibraryIds} = this.state;
+    const results = this.renderSuggestions(suggestions);
 
     return (
-      <div className="search-container">
-        <Autosuggest
-          ref={(autoSuggest) => {
-            this.autoSuggest = autoSuggest;
-          }}
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={this.getSuggestionValue}
-          renderSuggestion={this.renderSuggestion}
-          inputProps={inputProps}
-        />
-        {loading ? <img className="media-object"
+      <div className="search-container"
+           ref={(search) => {
+            if (search) {
+              this.searchInput = search.querySelector('input')
+            }
+          }}>
+        <DebounceInput
+          placeholder="Search for e-books and audiobooks..."
+          minLength={2}
+          debounceTimeout={300}
+          onChange={this.onChange}/>
+
+        <div className="loading-spinner">
+          {loading ? <img className="media-object"
                         style={{ margin: "auto" }}
                         src={loadingGIF}
                         width="100"
                         alt="loading"/> : null}
-        {value && !suggestions.length && !loading ?
-          <p>Oh no! No suggestions! Try changing your search.</p> : null }
+        </div>
+
+        <div className="no-results-message">
+          {value && !suggestions.length && !loading && selectedLibraryIds.length > 0 ?
+            <p>Oh no! No suggestions! Try changing your search.</p> : null }
+        </div>
+
+        <div className="no-libraries-message">
+          {selectedLibraryIds.length === 0 ?
+            <p>At least one library card must be selected to see results.</p> : null }
+        </div>
+
+        <ul className="results" role="listbox">
+          {suggestions.length > 0 && !loading ? results : null}
+        </ul>
       </div>
-    );
+    )
   }
 }
 
-export default Search;
+export default Search

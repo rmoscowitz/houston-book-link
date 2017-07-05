@@ -69,7 +69,7 @@ const clientSecret = envOrElse('OVERDRIVE_CLIENT_SECRET', () => {
   throw new Error('Must provide a OVERDRIVE_CLIENT_SECRET environment variable');
 });
 const clientId = envOrElse('OVERDRIVE_CLIENT_ID', () => {
-  throw new Error('Must provie a OVERDRIVE_CLIENT_ID environment variable');
+  throw new Error('Must provide a OVERDRIVE_CLIENT_ID environment variable');
 });
 const LIMIT = 300;
 

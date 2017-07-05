@@ -18,12 +18,12 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    const getImagePath = (libraryName) => {
-      const imagePaths = { // lol
-        "Houston Area Digital Media Catalog (TX)": houstonCard,
-        "Harris County Public Library (TX)": harrisCard,
-      };
-      return imagePaths[libraryName];
+    const getImagePath = (libraryId) => {
+      const imagePaths = {
+        1: houstonCard,
+        2: harrisCard,
+      }
+      return imagePaths[libraryId]
     };
 
     fetch(`/libraries`)
@@ -33,7 +33,7 @@ class Home extends React.Component {
           libraries: libraries.map(library => {
             return Object.assign(library, {
               selected: true,
-              imagePath: getImagePath(library.name),
+              imagePath: getImagePath(library.id),
             });
           })
         });

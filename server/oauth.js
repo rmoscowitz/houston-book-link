@@ -6,7 +6,7 @@ import Promise from 'bluebird';
 const CREDS = oAuth2.create({
   client: {
     id: envOrElse('OVERDRIVE_CLIENT_ID', () => {
-      throw new Error('Must provie a OVERDRIVE_CLIENT_ID environment variable');
+      throw new Error('Must provide a OVERDRIVE_CLIENT_ID environment variable');
     }),
     secret: envOrElse('OVERDRIVE_CLIENT_SECRET', () => {
       throw new Error('Must provide a OVERDRIVE_CLIENT_SECRET environment variable');
