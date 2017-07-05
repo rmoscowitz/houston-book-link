@@ -49,8 +49,9 @@ class Search extends React.Component {
     if (selectedLibraryIds.length > 0 && search) {
       fetch(`/search?search=${encodeURIComponent(search)}&libraries=${selectedLibraryIds.join(',')}`)
         .then(response => {
-          response.json().then(suggestions => {
-            this.setState({suggestions, loading: false})
+          response.json().then(data => {
+            const noDups = data.filter((book, index, self) => self.findIndex(other => other.id === book.id) === index);
+            this.setState({suggestions: noDups, loading: false})
           })
         })
     } else {
