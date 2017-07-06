@@ -65,7 +65,23 @@ class Search extends React.Component {
     }
   }
 
-  renderCheckoutInfo(results) {
+  renderResult(result, card, show) {
+    return (
+      <div className='col-6'
+           onClick={ () => { this.goToOverdrive(result) } }>
+        { show && result ?
+          <div className='checkout-details'>
+            <img src={card} alt={result.library_name}/>
+            <div className={ result.availability.available ? 'bold' : 'italic'}>
+              {result.availability.available ? 'Check Out' : 'Place Hold'}
+            </div>
+          </div>
+          : null }
+      </div>
+    )
+  }
+
+  renderCheckoutColumn(results) {
     const houstonResult = results.find(result => result.library_id === 1);
     const harrisResult = results.find(result => result.library_id === 2);
 
@@ -75,33 +91,13 @@ class Search extends React.Component {
     return (
       <div className='row'>
 
-        {/* houston public */}
-        <div className={'col-6 ' + (!showHarris ? 'offset-sm-6' : '')}
-             onClick={ () => { this.goToOverdrive(houstonResult) } }>
-          { showHouston && houstonResult ?
-            <div className="checkout-details ">
-              <img src={houstonCard} alt={houstonResult.library_name}/>
-              <div className={ houstonResult.availability.available ? 'bold' : 'italic'}>
-                {houstonResult.availability.available ? 'Check Out' : 'Place Hold'}
-              </div>
-            </div>
-            : null }
-        </div>
+        {/* offset column, since col-xs-offset doesn't work */}
+        {!showHarris ? <div className="col-6"></div> : null}
 
-        {/* harris county */}
-        <div className='col-6'
-             onClick={ () => { this.goToOverdrive(harrisResult) } }>
-          { showHarris && harrisResult ?
-            <div className="checkout-details">
-              <img src={harrisCard} alt={harrisResult.library_name}/>
-              <div className={ harrisResult.availability.available ? 'bold' : 'italic'}>
-                {harrisResult.availability.available ? 'Check Out' : 'Place Hold'}
-              </div>
-            </div>
-            : null }
-        </div>
+        {this.renderResult(houstonResult, houstonCard, showHouston)}
+        {this.renderResult(harrisResult, harrisCard, showHarris)}
 
-      </ div >
+      </div>
     )
   }
 
@@ -109,17 +105,17 @@ class Search extends React.Component {
     return (
       <li role="option" key={index} aria-selected="false">
         <div className="result row">
-          <div className="col-2 img-col">
+          <div className="img-col col-3 col-md-2">
             <img src={suggestion.img_thumbnail || defaultBookCover}
                  alt={suggestion.title}/>
           </div>
           <div className="result-details col-6">
-            <div className="title">{suggestion.title}</div>
-            <div>by&nbsp;{suggestion.primary_creator_name}</div>
+            <div className="title" dangerouslySetInnerHTML={{__html: suggestion.title}}></div> {/* TODO - don't be dangerous */}
+            <div className="author">by&nbsp;{suggestion.primary_creator_name}</div>
             <div>{suggestion.media_type}</div>
           </div>
-          <div className="checkout-info col-4">
-            { this.renderCheckoutInfo(suggestion.locations) }
+          <div className="checkout-info col-3 col-md-4">
+            { this.renderCheckoutColumn(suggestion.locations) }
           </div>
         </div>
       </li>
