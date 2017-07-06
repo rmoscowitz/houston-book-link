@@ -8,6 +8,7 @@ import dylan from '../images/dylan.png';
 import daniel from '../images/daniel.png';
 import eric from '../images/eric.png';
 import elaine from '../images/elaine.png';
+import rebecca  from '../images/rebecca.png';
 import logo from '../images/logo3-purple.png';
 
 class About extends React.Component {
@@ -74,13 +75,17 @@ class About extends React.Component {
           <div className="col-sm-12">
             <h2>Special Thanks</h2>
           </div>
-          <div className="col-xs-12 offset-sm-4 col-sm-2">
+          <div className="col-xs-12 offset-sm-3 col-sm-2">
             <img className="media-object" src={eric} width="128" alt="eric"/>
             <a href="https://github.com/mamoot">Eric</a>
           </div>
           <div className="col-xs-12 col-sm-2">
-            <img className="media-object" src={elaine} width="128" alt="cameron"/>
+            <img className="media-object" src={elaine} width="128" alt="elaine"/>
             <a href="https://github.com/imalooney">Elaine</a>
+          </div>
+          <div className="col-xs-12 col-sm-2">
+            <img className="media-object" src={rebecca} width="128" alt="rebecca"/>
+            <a href="https://www.linkedin.com/in/rebecca-symmank/">Rebecca</a>
           </div>
         </div>
         <div className="row row-media">
