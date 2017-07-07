@@ -6,7 +6,7 @@ export const search = (params) => {
   })
   return new BookCollection().query(function(qb) {
     qb.innerJoin('library_books', 'books.id', 'library_books.book_id');
-    qb.whereRaw(`tsv @@ plainto_tsquery('${params.search}')`)
+    qb.whereRaw('tsv @@ plainto_tsquery(?)', params.search)
     qb.whereIn('library_books.library_id', params.libraries)
     qb.limit(params.limit)
     qb.offset(params.offset)
