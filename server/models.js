@@ -14,8 +14,15 @@ const knex = require('knex')({
     user     : user,
     password : password,
     database : dbname,
-    charset  : 'utf8'
-  }
+    charset  : 'utf8',
+  },
+  debug: true,
+  pool: {
+    min: 2,
+    max: 50,
+    requestTimeout: 20000, // https://github.com/tgriesser/knex/issues/1382#issuecomment-219423066
+  },
+  acquireConnectionTimeout: 60000 // default
 });
 
 const bookshelf = require('bookshelf')(knex);

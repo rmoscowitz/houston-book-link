@@ -1,7 +1,6 @@
 import Promise from 'bluebird';
 import request from 'request-promise';
 
-import { envOrElse } from './util';
 import { getToken } from './oauth';
 
 

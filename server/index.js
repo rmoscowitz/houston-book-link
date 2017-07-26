@@ -5,13 +5,13 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
-
-
 app.get('/libraries', function(req, res) {
+  console.log(`GET /libraries -- ${new Date().toLocaleString()}`);
   libraries().then(libs => res.send(libs))
 });
 
 app.get('/search', function(req, res) {
+  console.log(`GET /search -- ${new Date().toLocaleDateString()}`);
   var params = {
     search: req.query.search || '',
     libraries: (req.query.libraries || '').split(","),
@@ -40,5 +40,5 @@ app.get('*', function(req, res) {
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, function () {
-  console.log(`Example app listening on port ${PORT}!`)
+  console.log(`App running on port ${PORT}!`)
 });
