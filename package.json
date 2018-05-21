@@ -36,7 +36,7 @@
     "start-frontend": "react-scripts start",
     "build-frontend": "react-scripts build ",
     "build-backend": "mkdir -p build/server && babel server -d build/server",
-    "prod": "NODE_ENV='PRODUCTION' node build/server/index.js",
+    "prod": "NODE_ENV='PRODUCTION' babel-node server/index.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "migrate": "knex migrate:latest",
