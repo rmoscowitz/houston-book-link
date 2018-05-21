@@ -1,6 +1,13 @@
 language: node_js
 node_js:
-    - "7"
+- 'node'
 script:
-    - npm run build-frontend
-    - npm run build-backend
+- npm run build-backend
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: KIxecqGGwsKov1cmF+3QKFb+YQBUPDg/VPXN6UbD31tdwm7VfXQ9a0Fw9qqqgrmXC2OvSd4cEWE5bEhfN+jqXuYM1mD7fnuochUc/OiasgeLw8HgpVMvxK0DN0mOD2M2mqw+lxf3pvdpnVPVEk54KFqsD58fhIH/sWrdUYcdfDYXFGsVhySfAvOp3GSa4Ou6gbQaahx63VWA3SEMvnaJQ0Rrm19c2fefK+U28SVBTiRCiCUETgqscqupw66usaSx1WpHXgJi8TrS4x5N8N6GYdSiiEeaV0Z8cbfiPqQhNQxKIYJbemDLrT3uxx0Q5GMHp0D0KuoNf69r+HssX42XOYnkOS+7Alv/iwjGS2FSmQVhteVwCCkGyPYamaV4Twe5gjeRua74lU2maLorRztg9RzhnQNN5RYEPOZvGje/Lxhpi97a4lbZcph5LFCy2UBt5bHNyTL0Od/JtZBm06Jm8kLmRsoQpR0BJUDQzxc5rYpw5txahEmc7xR/pTI0HsDlxBZi2bbiNasE6V3wsLGcW8iwZFj5X3Jop2wP0Jv4wo145RT6x6dI1ZAfftWk3MNTLcbH0/fL32odU0hhkpPTeIkMPoAz7GP5NX1YQA4a/xq5r27gAqWZjTSdFfYzZG/hja75lC/7cGKlVycrNfTeWcbezjKX3gsD1zc9VXQVzGw=
+  app: houston-book-link
+  on:
+    repo: rmoscowitz/houston-book-link
