@@ -90,7 +90,7 @@ Promise
   .all([oauthTokenPromise, collectionsOffsetsPromise])
   .then(([token, collectionsOffsets]) => {
     // Chunk requests in order to prevent memory and connection errors
-    const chunks = _.chunk(collectionsOffsets, 20);
+    const chunks = _.chunk(collectionsOffsets, 8);
     // Each chunk must finish before the next chunk begins
     const chunkedWorkPromise = chunks.reduce((previousPromise, chunk) => {
       return previousPromise.then(_ => {
@@ -102,8 +102,8 @@ Promise
     }, new Promise((resolve, _) => resolve()));
     return chunkedWorkPromise;
   })
-  //.then(_ => deleteUpdatedBefore(Math.floor(startTime / 1000)))
-  //.then(count => console.log(`Deleted ${count} books that weren't updated`))
+  .then(_ => deleteUpdatedBefore(Math.floor(startTime / 1000)))
+  .then(count => console.log(`Deleted ${count} books that weren't updated`))
   .then(_ => updateTextSearchVector())
   .then(_ => console.log(`Finished in ${elapsedTime(startTime)} s`))
   .then(_ => process.exit())
