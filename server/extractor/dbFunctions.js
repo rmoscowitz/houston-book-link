@@ -41,7 +41,7 @@ export function updateTextSearchVector() {
  */
 export function deleteUpdatedBefore(timestamp) {
   return knex('books')
-      .whereRaw('last_updated < TO_TIMESTAMP(?)', [timestamp])
+      .whereRaw('last_updated < ?', [timestamp])
       .del();
 }
 
@@ -70,19 +70,19 @@ export function processAndStore(libraries, formats, response) {
         img_cover: _.get(product, ['images', 'cover', 'href']),
         img_cover_150_wide: _.get(product, ['images', 'cover150Wide', 'href']),
         img_cover_300_wide: _.get(product, ['images', 'cover300Wide', 'href']),
-        last_updated: new Date()
+        last_updated: new Date(Date.now())
       };
       const libraryBook = {
         library_id: libraries[libraryId],
         date_added: product.dateAdded,
         star_rating: product.starRating,
         overdrive_href: product.contentDetails[0].href,
-        last_updated: new Date()
+        last_updated: new Date(Date.now())
       };
       const bookFormats = product.formats.map(format => {
         return {
           format_id: formats[format.id],
-          last_updated: new Date()
+          last_updated: new Date(Date.now())
         }
       });
       return { book, libraryBook, bookFormats };

@@ -85,7 +85,7 @@ const collectionsOffsetsPromise = librariesPromise
   .then(initialReqForLibraries)
   .then(collectionsAndOffsets);
 
-const startTime = Date.now();
+const startTime = new Date(Date.now());
 Promise
   .all([oauthTokenPromise, collectionsOffsetsPromise])
   .then(([token, collectionsOffsets]) => {
@@ -102,7 +102,7 @@ Promise
     }, new Promise((resolve, _) => resolve()));
     return chunkedWorkPromise;
   })
-  .then(_ => deleteUpdatedBefore(Math.floor(startTime / 1000)))
+  .then(_ => deleteUpdatedBefore(startTime))
   .then(count => console.log(`Deleted ${count} books that weren't updated`))
   .then(_ => updateTextSearchVector())
   .then(_ => console.log(`Finished in ${elapsedTime(startTime)} s`))
