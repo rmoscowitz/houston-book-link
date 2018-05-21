@@ -1,5 +1,14 @@
 // Update with your config settings.
-const util = require('./build/server/util.js');
+let util ;
+try {
+    util = require('./server/util.js');
+} catch (err) {
+    try {
+        util = require('./build/server/util.js');
+    } catch (err) {
+        console.log("Please run `npm run build-backend` before using knex");
+    }
+}
 const os = require('os');
 
 const user = util.envOrElse('PG_USER', os.userInfo().username)
