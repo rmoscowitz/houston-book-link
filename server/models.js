@@ -1,29 +1,7 @@
 const os = require('os');
 const util = require('./util.js');
 
-const user = util.envOrElse('PG_USER', os.userInfo().username)
-const password = util.envOrElse('PG_PASSWORD', '')
-const dbname = util.envOrElse('PG_DBNAME', 'postgres')
-const host = util.envOrElse('PG_HOST', 'localhost')
-
-
-const knex = require('knex')({
-  client: 'pg',
-  connection: {
-    host     : host,
-    user     : user,
-    password : password,
-    database : dbname,
-    charset  : 'utf8',
-  },
-  debug: true,
-  pool: {
-    min: 2,
-    max: 50,
-    requestTimeout: 20000, // https://github.com/tgriesser/knex/issues/1382#issuecomment-219423066
-  },
-  acquireConnectionTimeout: 60000 // default
-});
+const knex = require('knex')(require('../knexfile'))
 
 const bookshelf = require('bookshelf')(knex);
 
