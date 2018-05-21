@@ -8,13 +8,17 @@ See our [Houston Hackathon](https://houstonhackathon5.devpost.com/submissions) s
 * [CreateReactApp](https://github.com/facebookincubator/create-react-app) for React front-end, with Bootstrap & ionicons
 
 ## To serve application
+* Get your Overdrive API credentials
+    * If you want to work with Houston libraries, ask the current maintainer for them
+* Set the `OVERDRIVE_CLIENT_SECRET` and `OVERDRIVE_CLIENT_ID` environment variables
 * Checkout and navigate into the repo
 * Install node from https://nodejs.org/en/download/
-* Get a Postgres instance up and running
-* Run ```npm install``` to get dependencies
-* Run ```npm run migrate && npm run run-seeds``` to set up your database schema
-* Run ```npm run extractor``` to populate your database with books from Overdrive
-* Run ```npm start``` to start up Node express server and serve front-end
+* Install postgres (`brew install postgres` for mac users)
+* Create the database with `createdb postgres`
+* Run `npm install` to get dependencies
+* Run `npm run migrate` and `npm run run-seeds` to set up your database schema
+* Run `npm run extractor` to populate your database with books from Overdrive
+* Run `npm start` to start up Node express server and serve front-end
 
 ## Contributing
 * Please make changes in feature branches and submit a pull request to master.
