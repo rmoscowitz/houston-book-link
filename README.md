@@ -16,7 +16,7 @@ See our [Houston Hackathon](https://houstonhackathon5.devpost.com/submissions) s
 * Install postgres (`brew install postgres` for mac users)
 * Create the database with `createdb postgres`
 * Run `npm install` to get dependencies
-* Run `npm run migrate` and `npm run run-seeds` to set up your database schema
+* Run `npm run build-backend` then `npm run migrate` then `npm run run-seeds` to set up your database schema
 * Run `npm run extractor` to populate your database with books from Overdrive
 * Run `npm start` to start up Node express server and serve front-end
 
