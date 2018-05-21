@@ -90,7 +90,7 @@ Promise
   .all([oauthTokenPromise, collectionsOffsetsPromise])
   .then(([token, collectionsOffsets]) => {
     // Chunk requests in order to prevent memory and connection errors
-    const chunks = _.chunk(collectionsOffsets, 32);
+    const chunks = _.chunk(collectionsOffsets, 20);
     // Each chunk must finish before the next chunk begins
     const chunkedWorkPromise = chunks.reduce((previousPromise, chunk) => {
       return previousPromise.then(_ => {

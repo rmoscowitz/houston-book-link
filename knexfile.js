@@ -26,7 +26,7 @@ module.exports = {
   ssl: useSSL,
   pool: {
     min: 2,
-    max: 50,
+    max: 20,
     requestTimeout: 20000, // https://github.com/tgriesser/knex/issues/1382#issuecomment-219423066
   },
   acquireConnectionTimeout: 60000, // default
