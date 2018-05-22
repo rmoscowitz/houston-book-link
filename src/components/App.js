@@ -3,7 +3,7 @@ import 'babel-polyfill';
 import './App.css';
 
 import React from 'react';
-import {HashRouter, Link, Route} from 'react-router-dom';
+import {Router, Link, Route} from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -37,14 +37,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <HashRouter history={this.props.history}>
+      <Router history={this.props.history}>
         <div className="App">
           {/* Top Bar */}
-          <Navbar inverse toggleable>
-            <NavbarToggler right onClick={this.toggle}/>
+          <Navbar dark expand="sm">
             <NavbarBrand tag={Link} to="/">
               <h3>Houston Book Link</h3>
             </NavbarBrand>
+            <NavbarToggler right="true" onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
@@ -78,7 +78,7 @@ class App extends React.Component {
             </div>
           </footer>
         </div>
-      </HashRouter>
+      </Router>
     )
   }
 }
