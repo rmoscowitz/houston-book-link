@@ -7,8 +7,18 @@
 	padding: 20px 20px 80px 20px; /* 80px on bottom for footer */
 }
 
+.alert {
+	margin: 10px auto;
+	max-width: 800px;
+	width: 90%;
+}
+
+.alert button:focus {
+	outline: none;
+}
+
 .navbar {
-	background-color: #646ba7;
+	background-color: #062d5d;
 	border: none;
 	color: white;
 	-webkit-border-radius: 0px;

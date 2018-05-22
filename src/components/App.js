@@ -44,7 +44,7 @@ class App extends React.Component {
             <NavbarBrand tag={Link} to="/">
               <h3>Houston Book Link</h3>
             </NavbarBrand>
-            <NavbarToggler right="true" onClick={this.toggle}/>
+            <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
@@ -73,8 +73,7 @@ class App extends React.Component {
               </a>!
             </div>
             <div className="footer-overdrive">
-              <img src={overdrive}
-                   alt="Powered by Overdrive Logo"/>
+              <img src={overdrive} alt="Powered by Overdrive Logo"/>
             </div>
           </footer>
         </div>
