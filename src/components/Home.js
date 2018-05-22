@@ -21,24 +21,29 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    const getImagePath = (libraryId) => {
-      const imagePaths = {
-        1: houstonCard,
-        2: harrisCard,
-      }
-      return imagePaths[libraryId]
-    };
+    const imagePaths = {
+      1: houstonCard,
+      2: harrisCard,
+    }
+
+    const shortNames = {
+      1: 'Houston Public Library',
+      2: 'Harris County Library'
+    }
 
     fetch(`/libraries`)
     .then(response => {
       response.json().then(libraries => {
+        const mapped = libraries.map(library => {
+          return Object.assign(library, {
+            selected: true,
+            imagePath: imagePaths[library.id],
+            shortName: shortNames[library.id]
+          });
+        });
+
         this.setState({
-          libraries: libraries.map(library => {
-            return Object.assign(library, {
-              selected: true,
-              imagePath: getImagePath(library.id),
-            });
-          })
+          libraries: mapped
         });
       })
     });
@@ -67,6 +72,7 @@ class Home extends React.Component {
             imagePath={library.imagePath}
             imageAltText={library.name}
             libraryId={library.id}
+            shortName={library.shortName}
             select={this.select}/>
     ));
   }
