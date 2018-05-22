@@ -19,19 +19,22 @@ class Card extends React.Component {
   }
 
   render() {
-    let icon = null;
+    let labelClasses = 'library-short-name '
+    let iconClasses = 'icon '
     if (this.state.selected) {
-      icon = <i className="icon ion-checkmark-circled green"></i>;
+      iconClasses += 'ion-checkmark-circled green'
+      labelClasses += 'selected'
     } else {
-      icon = <i className="icon ion-close-circled red"></i>;
+      iconClasses += 'ion-close-circled red'
     }
 
     return (
       <div className="card" onClick={this._onCardClick}>
-        {icon}
+        <i className={iconClasses}></i>
         <img className={"card-image " + (this.state.selected ? "" : "gray")}
              src={this.props.imagePath}
              alt={this.props.imageAltText}/>
+        <div className={labelClasses}>{this.props.shortName}</div>
       </div>
     )
   }
