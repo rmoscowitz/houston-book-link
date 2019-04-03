@@ -5,22 +5,22 @@
   "main": "server/index.js",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "bookshelf": "^0.13.3",
-    "bootstrap": "4.1.1",
-    "knex": "^0.14.6",
-    "pg": "^7.4.3",
-    "react": "^16.3.2",
+    "bookshelf": "^0.14.2",
+    "bootstrap": "^4.3.1",
+    "knex": "^0.16.3",
+    "pg": "^7.9.0",
+    "react": "^16.8.6",
     "react-debounce-input": "^3.2.0",
-    "react-dom": "^16.3.2",
-    "react-foundation": "^0.9.5",
-    "react-ga": "^2.5.2",
-    "react-ionicons": "^2.1.6",
-    "react-router-dom": "^4.2.2",
-    "react-transition-group": "^2.3.1",
-    "reactstrap": "6.0.1",
-    "request": "^2.87.0",
-    "request-promise": "^4.2.2",
-    "simple-oauth2": "^1.5.0"
+    "react-dom": "^16.8.6",
+    "react-foundation": "^0.9.6",
+    "react-ga": "^2.5.7",
+    "react-ionicons": "^3.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-transition-group": "^2.8.0",
+    "reactstrap": "^7.1.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "simple-oauth2": "^2.2.1"
   },
   "devDependencies": {
     "react-scripts": "1.1.4",
@@ -31,7 +31,7 @@
   },
   "scripts": {
     "start": "npm run start-backend & npm run start-frontend",
-    "debug": "babel-node debug server/index.nps & npm run start-frontend",
+    "debug": "babel-node debug server/index.js & npm run start-frontend",
     "start-backend": "babel-node server/index.js",
     "start-frontend": "react-scripts start",
     "build-frontend": "react-scripts build ",
@@ -45,5 +45,5 @@
     "run-seeds": "knex seed:run",
     "extractor": "babel-node server/extractor/main.js"
   },
-  "proxy": "http://localhost:4999"
+  "proxy": "http://localhost:4000"
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
 
@@ -10,7 +10,7 @@ import './index.css';
 
 ReactGA.initialize('UA-100392725-1');
 
-const history = createHistory();
+const history = createBrowserHistory();
 history.listen(location => {
   ReactGA.set({ page: location.pathname });
   ReactGA.pageview(location.pathname);

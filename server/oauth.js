@@ -17,8 +17,6 @@ const CREDS = oAuth2.create({
     tokenPath: '/token',
   },
   options: {
-    useBodyAuth: false,
-    useBasicAuthorizationHeader: true,
     bodyFormat: 'form'
   }
 });
